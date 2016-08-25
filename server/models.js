@@ -15,13 +15,12 @@ var config = require('./config');
 
 var mongoose = require('mongoose');
 var chalk = require('chalk');
-
-mongoose.connect(config.mongoose.url);
-var mongooseConnection = mongoose.connection;
-mongooseConnection.on('error', function() {
+// var db = mongoose.connect(config.mongoose.local);  // NOTE: need to run mongod on localhost
+var db = mongoose.connect(config.mongoose.mlab);
+db.connection.on('error', function() {
   console.log('mongoose connection', chalk.red('open ERROR'));
 });
-mongooseConnection.once('open', function() {
+db.connection.once('open', function() {
   console.log('mongoose connection', chalk.green('open OK'));
 });
 
