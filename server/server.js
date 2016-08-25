@@ -1,6 +1,3 @@
-var http = require('http');
-var fs = require('fs');
-var url = require('url');
 var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');

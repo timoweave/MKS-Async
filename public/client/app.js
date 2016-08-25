@@ -1,5 +1,15 @@
-angular.module('async', [])
+angular.module('async', ['async.mainController', 'ngRoute'])
 
-.controller('MainController', function($scope) {
-	                                                            $scope.test = 'angular hooked up';
+
+.config(function($routeProvider){
+	// $routeProvider
+	// .when('/providerList', {
+	// 	templateUrl: '/providerList.html',
+	// 	controller: 'mainController'
+	// })
+
+	// .otherwise({
+	// 	redirectTo: '/providerList'
+	// })
 });
+

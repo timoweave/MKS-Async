@@ -3,15 +3,44 @@
 <html ng-app='async'>/;
 
   <head>
+    <title>School Tour</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.0/journal/bootstrap.min.css">
   	<link rel='stylesheet' type='text/css' href='/client/styles/style.css'/>
   </head>
 
   <body ng-controller='MainController'>
-    <h1 class='test'>Tour-Explorer</h1>
-    <h1>{{ test }}</h1>
-    <script src='/angular/angular.js'></script>
-    <script src='/angular-route/angular-route.js'></script>
-    <script src='client/app.js'></script>
+    <nav>
+      <div>
+        <h1>Campus Tour</h1>
+        <button id='addModal'>Add a listing</button>
+      </div>
+    </nav>  
+
+    <hr>
+    <!-- trying out modal: -->
+    <div id='myModal' class='modal'>
+      <div class='model-content'>
+        <label>Name:</label>
+        <input type='text'></input>
+      </div>
+    </div>
+
+    <div>
+      <form>
+        <input type='text' name='school' value='search school...'>
+        <input type='text' name='major' value='major?'>
+        
+        <button>Search</button>
+      </form>
+    </div>
+
+    <div ng-view></div>
+
+
+  <script src='/angular/angular.js'></script>
+  <script src='/angular-route/angular-route.js'></script>
+  <script src='client/app.js'></script>
+  <script src='client/mainController.js'></script>
   </body>
 
   <footer>
