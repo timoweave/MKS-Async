@@ -5,6 +5,9 @@ node_js:
 notifications:
   email:
     recipients:
-      - timoweave@gmail.com
+      - danagotmail@gmail.com
+      - c.s.sun5@gmail.com
+      - sdp781@gmail.com
+      - timoweave@gmail.com      
     on_success: always
     on_failure: always
