@@ -15,14 +15,11 @@ app.use(morgan('combined'));
 
 app.use(express.static(path.resolve('../public')));
 app.use(express.static(path.resolve('../bower_components')));
-app.use(express.static(path.resolve('../client')));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res){
-	console.log(__dirname + '../public/index.html');
-	console.log(path.resolve('../public/index.html'));
 	res.sendFile(path.resolve('../public/index.html'));
 })
 
