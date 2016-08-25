@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Async Greenfield Project",
   "scripts": {
+    "json_server" : "json-server server/models.json",
     "mongo_daemon" : "mkdir -p data/db && mongod --dbpath data/db",
     "node_server" : "node server/server.js",
     "test_karma": "karma start --browsers PhantomJS",
@@ -34,9 +35,9 @@
     "morgan": "^1.7.0"
   },
   "dependencies": {
-        "chalk": "^1.1.3",
-      "mongoose": "^4.5.10",
-        "mongoose-sequence": "^3.0.2",      
+    "chalk": "^1.1.3",
+    "mongoose": "^4.5.10",
+    "mongoose-sequence": "^3.0.2",
     "yahoo-finance": "0.2.13",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.4.3",
