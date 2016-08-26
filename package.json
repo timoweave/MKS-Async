@@ -8,9 +8,9 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "postinstall": "./node_modules/bower/bin/bower install",
+    "postinstall": "bower install",
     "mongo_daemon": "mkdir -p data/db && mongod --dbpath data/db",
-    "json_server" : "json-server server/models.json",
+    "json_server": "json-server server/models.json",
     "test_karma": "karma start --browsers PhantomJS",
     "test_mocha": "mocha -R spec spec/",
     "lint": "eslint --fix public server"
@@ -37,6 +37,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.4.3",
+    "bower": "^1.7.9",
     "chalk": "^1.1.3",
     "eslint": "^3.3.1",
     "express": "^4.4.5",
