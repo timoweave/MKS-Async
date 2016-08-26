@@ -1,7 +1,7 @@
 {
-  "name": "Correlation-Calculator",
+  "name": "Future Insight",
   "version": "0.0.0",
-  "authors": "Sergey Potashnikov",
+  "authors": "Sergey Potashnikov, Cindy Sun, Tim Shui, Dana Li",
   "license": "MIT",
   "ignore": [
     "**/.*",
