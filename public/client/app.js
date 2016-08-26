@@ -2,15 +2,15 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
 
 
 .config(function($routeProvider) {
-	// $routeProvider
+  // $routeProvider
 
-	// .when('/providerList', {
-	// 	templateUrl: '/providerList.html',
-	// 	controller: 'mainController'
-	// })
+  // .when('/providerList', {
+  //  templateUrl: '/providerList.html',
+  //  controller: 'mainController'
+  // })
 
-	// .otherwise({
-	// 	redirectTo: '/providerList'
-	// })
+  // .otherwise({
+  //  redirectTo: '/providerList'
+  // })
 });
 
