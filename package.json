@@ -3,23 +3,18 @@
   "version": "0.0.0",
   "description": "Async Greenfield Project",
   "scripts": {
-    "mongo_daemon" : "mkdir -p data/db && mongod --dbpath data/db",
-    "node_server" : "node server/server.js",
+    "mongo_daemon": "mkdir -p data/db && mongod --dbpath data/db",
+    "node_server": "node server/server.js",
     "test_karma": "karma start --browsers PhantomJS",
-    "test_mocha": "mocha -R spec spec/"
+    "test_mocha": "mocha -R spec spec/",
+    "lint": "eslint --fix public server"
   },
   "author": "Sergey Potashnikov, Cindy Sun, Dana Li, Tim Shiu",
   "license": "ISC",
-    "devDependencies": {
+  "devDependencies": {
     "browser-sync": "^1.5.7",
     "clone-stats": "0.0.1",
     "expect.js": "^0.3.1",
-    "gulp": "^3.8.5",
-    "gulp-if": "^1.2.5",
-    "gulp-jshint": "^1.6.3",
-    "gulp-karma": "0.0.4",
-    "gulp-nodemon": "^1.0.4",
-    "gulp-shell": "^0.2.7",
     "jshint-stylish": "^0.2.0",
     "karma": "^0.12.16",
     "karma-chrome-launcher": "^0.1.4",
@@ -34,15 +29,14 @@
     "morgan": "^1.7.0"
   },
   "dependencies": {
-        "chalk": "^1.1.3",
-      "mongoose": "^4.5.10",
-        "mongoose-sequence": "^3.0.2",      
-    "yahoo-finance": "0.2.13",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.4.3",
+    "chalk": "^1.1.3",
+    "eslint": "^3.3.1",
     "express": "^4.4.5",
     "jwt-simple": "^0.2.0",
     "mongoose": "^4.1.0",
+    "mongoose-sequence": "^3.0.2",
     "morgan": "^1.1.1",
     "passport": "^0.2.0",
     "passport-local": "^1.0.0",
