@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var path = require('path');
 var models = require('./models');
+var chalk = require('chalk');
 var app = express();
 
 // app.set('views', __dirname + '/views');
@@ -19,13 +20,20 @@ app.use(bodyParser.json());
 app.use('/api', models.Router);
 
 app.get('/', function(req, res) {
-	res.sendFile(path.resolve('../public/index.html'));
+  // var something = req.body.something;
+  //do something with 'something'
+  res.sendFile(path.resolve('../public/index.html'));
 });
 
 app.post('/', function(req, res) {
-	var something = req.body.something;
-	//do something with 'something'
+
+  var something = req.body.something;
+  //do something with 'something'
+  
 });
 
-console.log('ASYNC group server listening on 3000');
-app.listen(3000);
+var server = app.listen(3000, function() {
+  console.log(chalk.green('OK'), 'server', server.address().port);
+>>>>>>> chore(db): make verbose mongo connection
+});
+
