@@ -2,11 +2,15 @@
   "name": "MKS-Async",
   "version": "0.0.0",
   "description": "Async Greenfield Project",
+  "engines": {
+    "node": "4.4.7",
+    "npm": "3.10.6"
+  },
   "scripts": {
+    "start": "node server/server.js",
+    "postinstall": "./node_modules/bower/bin/bower install",
     "mongo_daemon": "mkdir -p data/db && mongod --dbpath data/db",
-    "node_server": "node server/server.js",
     "json_server" : "json-server server/models.json",
-    "start": "node server/server.js",      
     "test_karma": "karma start --browsers PhantomJS",
     "test_mocha": "mocha -R spec spec/",
     "lint": "eslint --fix public server"
