@@ -11,8 +11,8 @@ var app = express();
 app.set('port', (process.env.PORT) || 3000);
 app.use(morgan('combined'));
 
-app.use(express.static(path.resolve('../public')));
-app.use(express.static(path.resolve('../bower_components')));
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname,'./bower_components')));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -22,7 +22,7 @@ app.use('/api', models.Router);
 app.get('/', function(req, res) {
   // var something = req.body.something;
   //do something with 'something'
-  res.sendFile(path.resolve('../public/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 app.post('/', function(req, res) {
