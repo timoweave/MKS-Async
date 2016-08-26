@@ -53,13 +53,35 @@ var PostSchema = mongoose.Schema({
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
+var BookingSchema = mongoose.Schema({
+  postId: Number,
+  userId: Number
+}, {
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
+});
+
+var CommentSchema = mongoose.Schema({
+  comment: String,
+  postId: { type: mongoose.Schema.Types.ObjectId, ref: 'PostSchema' },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'UserSchema' }  
+}, {
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
+});
+
 var UserSequence = require('mongoose-sequence');
 var PostSequence = require('mongoose-sequence');
-UserSchema.plugin(UserSequence, {inc_field: 'userId'});
-PostSchema.plugin(PostSequence, {inc_field: 'postId'});
+var BookingSequence = require('mongoose-sequence');
+var CommentSequence = require('mongoose-sequence');
+
+UserSchema.plugin(UserSequence, {'inc_field': 'userId'});
+PostSchema.plugin(PostSequence, {'inc_field': 'postId'});
+BookingSchema.plugin(UserSequence, {'inc_field': 'bookingId'});
+CommentSchema.plugin(PostSequence, {'inc_field': 'commentId'});
 
 var UserModel = mongoose.model('User', UserSchema);
 var PostModel = mongoose.model('Post', PostSchema);
+var BookingModel = mongoose.model('Booking', BookingSchema);
+var CommentModel = mongoose.model('Comment', CommentSchema);
 
 //////////////////////////////////////////////////////
 /*
@@ -80,8 +102,12 @@ router
 .post(function(req, res) {
   console.log('post /users', req.body);
   var user = new UserModel(req.body);
-  user.save(function() {
-    res.status(200).json(user);
+  user.save(function(err) {
+    if (err) {
+      res.status(404).end('cannot save');
+    } else {
+      res.status(200).json(user);
+    }
   });
 })
 ;
@@ -122,6 +148,60 @@ router
 })
 ;
 
+router
+.route('/bookings')
+.get(function(req, res) {
+  console.log('get /bookings');
+  BookingModel.find(function(err, body) {
+    res.status(200).json(body);
+  });
+})
+.post(function(req, res) {
+  console.log('post /bookings', req.body);
+  var booking = new BookingModel(req.body);
+  booking.save(function() {
+    res.status(200).json(booking);
+  });
+})
+;
+
+router
+.route('/bookings/:id')
+.get(function(req, res) {
+  console.log('get /bookings/:id', req.params.id);
+  BookingModel.find({bookingId: req.params.id}, function(err, posts) {
+    res.status(200).json(posts);
+  });
+})
+;
+
+router
+.route('/comments')
+.get(function(req, res) {
+  console.log('get /comments');
+  CommentModel.find(function(err, body) {
+    res.status(200).json(body);
+  });
+})
+.post(function(req, res) {
+  console.log('post /comments', req.body);
+  var booking = new CommentModel(req.body);
+  booking.save(function() {
+    res.status(200).json(booking);
+  });
+})
+;
+
+router
+.route('/comments/:id')
+.get(function(req, res) {
+  console.log('get /comments/:id', req.params.id);
+  CommentModel.find({bookingId: req.params.id}, function(err, posts) {
+    res.status(200).json(posts);
+  });
+})
+;
+
 //////////////////////////////////////////////////////
 /*
  * 4. exports
@@ -130,5 +210,7 @@ router
 module.exports = {
   User: UserModel,
   Post: PostModel,
+  Comment: CommentModel,
+  Booking: BookingModel,
   Router: router
 };
