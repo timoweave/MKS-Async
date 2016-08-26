@@ -1,0 +1,50 @@
+{
+    "posts": [
+        { "id": 0,
+          "title": "chemistry tour",
+          "description" : "Pulvinar etiam non quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet, consectetur adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla.",
+          "price" : 20.0,
+          "userId": 0
+        },
+        { "id": 1,
+          "title": "modern art school",
+          "description" : "Non pulvinar neque laoreet suspendisse interdum consectetur libero! Mus mauris vitae ultricies leo integer malesuada nunc vel risus commodo viverra maecenas accumsan, lacus vel facilisis volutpat, est velit egestas dui!",
+          "price" : 40.0,
+          "userId": 1
+        }
+    ],
+    "comments": [
+        { "id": 0,
+          "comment": "boring guide",
+          "postId": 0,
+          "userId": 1},
+        { "id": 1,
+          "comment": "awesome tour",
+          "postId": 1,
+          "userId": 0}
+    ],
+    "users": [
+        {
+            "id": 0,
+            "username": "ewest",
+            "picture" : "TBD",
+            "school" : "University of California, Berkely",
+            "email": "ewest@yahoo.com",
+            "firstname" : "Elizabeth",
+            "lastname" : "West"
+        },
+        {
+            "id": 1,
+            "username": "jking",
+            "picture" : "TBD",            
+            "school" : "Stanford University",
+            "email": "jking@gmail.com",
+            "firstname" : "James",
+            "lastname" : "King"
+        }
+    ],
+    "bookings" : [
+        { "postId" : 0, "userId" : 1 },
+        { "postId" : 1, "userId" : 0 }
+    ]
+}

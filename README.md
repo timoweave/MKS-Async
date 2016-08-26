@@ -63,3 +63,7 @@ git commit -m "fix(web-server): server connecting to heroku correctly"
 - eslint
 - git, commit message
 
+## database
+- http://dbdesigner.net/designer/schema/45235
+- picture of the schema in server/models.png
+- json-server, localhost (mongod), and mlab 
