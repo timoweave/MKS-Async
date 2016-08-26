@@ -1,7 +1,32 @@
 <div ng-controller='FormController'>
-	<form>
-		<label>Name:</label>
-		<input type='text'></input>
-		<button>OK</button>
-	</form>
+    <div class='modal-header'>
+        Create Your Tour
+    </div>
+    <div class='modal-body form-group'>
+      <form ng-submit='submit()'>
+
+        <label>Your name:</label>
+        <input class='form-control' ng-model='name' type='text'></input>
+
+        <label>School or University:</label>
+        <input class='form-control' ng-model='school' type='text'></input>
+
+        <label>Major:</label>
+        <input class='form-control' ng-model='major' type='text'></input>
+
+        <label>Price:</label>
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <input class="form-control" type="number" ng-model='price'>
+        </div>
+
+        <label>Description:</label>
+        <textarea class='form-control' ng-model='description'></textarea>
+      </form>
+    </div>
+
+    <div class='modal-footer'>
+        <button class="btn btn-success">Create</button>
+        <button class="btn btn-outline-default" ng-click='cancel()'>Cancel</button>        
+    </div>
 </div>

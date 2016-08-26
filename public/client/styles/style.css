@@ -1,7 +1,7 @@
 body {
   margin: 0;
   margin-top: 10px;
-  font-family: arial, sans-serif;
+  font-family: Helvetica,arial, sans-serif;
 }
 
 a {
@@ -11,7 +11,6 @@ a {
 }
 
 h1 {
-  font-style: italic;
   margin-bottom: 10px;
 }
 
@@ -53,64 +52,12 @@ h1 {
   margin-top: 10px;
 }
 
-.link {
-  clear: both;
-  margin-bottom: 5px;
-  padding: 5px;
-  min-height: 50px;
-}
-
-.link:hover {
-  background-color: #efe;
-}
-
-.link img {
-  float: left;
-  margin: 0 5px;
-}
-
-.link .visits {
-  float: right;
-  margin-right: 10px;
-  margin-left: 20px;
-}
-
-.link .visits .count {
-  font-size: 46px;
-  font-weight: 600;
-}
-
-.link .title {
-  font-weight: 600;
-}
-
-.link .original {
-  color: #aaa;
-  font-size: 12px;
-}
-
-.link .info {
-  margin-left: 55px;
-}
-
-form {
-  margin: 10px;
-}
-
 input {
   width: 360px;
   display: block;
   font-size: 13px;
   padding: 5px;
   margin-bottom: 5px;
-}
-
-input[type=url] {
-  display: inline
-}
-
-input[type=url]:focus {
-  outline: none;
 }
 
 
@@ -126,37 +73,11 @@ input[type=url]:focus {
   margin: 0 10px;
 }
 
-.creator {
-  height: 50px;
+.btn-outline-default {
+  background-color: transparent;
+  color: inherit;
+  border-color: grey;
+  
 }
-
-.creator form {
-  float: left;
-  height: 80px;
-}
-
-.creator img.spinner {
-  height: 46px;
-  margin-bottom: 5px;
-  padding: 10px;
-  display: none;
-}
-
-.creator .message {
-  clear: both;
-}
-
-
-.mini-title {
-  font-size: 12px;
-
-}
-
-.test {
-  font-size: 50px;
-}
-
-
-
 
 
