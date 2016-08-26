@@ -10,8 +10,10 @@
     "client/lib"
   ],
   "dependencies": {
-    "angular": "~1.2.18",
+    "angular": "^1.5.8",
     "angular-route": "~1.2.18",
-    "angular-mocks": "~1.2.18"
+    "angular-mocks": "~1.2.18",
+    "bootstrap": "*",
+    "angular-bootstrap": "^2.1.3"
   }
 }

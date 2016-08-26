@@ -1,5 +1,19 @@
-angular.module('async', [])
+angular.module('async', ['async.mainController','async.formController', 'ngRoute', 'ui.bootstrap'])
 
-.controller('MainController', function($scope) {
-	                                                            $scope.test = 'angular hooked up';
+
+.config(function($routeProvider){
+	$routeProvider
+	.when('/postForm',{
+		templateUrl: "client/postForm/postForm.html",
+		controller: 'FormController'
+	})
+	// .when('/providerList', {
+	// 	templateUrl: '/providerList.html',
+	// 	controller: 'mainController'
+	// })
+
+	// .otherwise({
+	// 	redirectTo: '/providerList'
+	// })
 });
+
