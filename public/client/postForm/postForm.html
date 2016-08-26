@@ -1,7 +1,20 @@
 <div ng-controller='FormController'>
-	<form>
+	<form ng-submit='submit()'>
+
 		<label>Name:</label>
-		<input type='text'></input>
+		<input ng-model='name' type='text'></input>
+
+		<label>School:</label>
+		<input ng-model='school' type='text'></input>
+
+		<label>Major:</label>
+		<input ng-model='major' type='text'></input>
+
+		<label>Description:</label>
+		<textarea ng-model='description'></textarea>
+
 		<button>OK</button>
+		<button ng-click='cancel()'>Cancel</button>
+
 	</form>
 </div>
