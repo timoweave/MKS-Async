@@ -1,13 +1,13 @@
 angular.module('async.formController', [])
 
-.controller('FormController', function($scope, $http){
+.controller('FormController', function($scope, $http) {
 
-	$scope.submit = function(){
-		//submit info.
-	}
+  $scope.submit = function() {
+    //submit info.
+  };
 
-	$scope.cancel = function(){
-		$scope.$parent.$dismiss();
-	}
+  $scope.cancel = function() {
+    $scope.$parent.$dismiss();
+  };
 
 });
