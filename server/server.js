@@ -29,11 +29,10 @@ app.post('/', function(req, res) {
 
   var something = req.body.something;
   //do something with 'something'
-  
+
 });
 
 var server = app.listen(3000, function() {
   console.log(chalk.green('OK'), 'server', server.address().port);
->>>>>>> chore(db): make verbose mongo connection
 });
 
