@@ -12,18 +12,11 @@
     <nav>
       <div>
         <h1>Campus Tour</h1>
-        <button id='addModal'>Add a listing</button>
+        <button ng-click='openForm()'>Add a listing</button>
       </div>
     </nav>  
 
     <hr>
-    <!-- trying out modal: -->
-    <div id='myModal' class='modal'>
-      <div class='model-content'>
-        <label>Name:</label>
-        <input type='text'></input>
-      </div>
-    </div>
 
     <div>
       <form>
@@ -36,11 +29,13 @@
 
     <div ng-view></div>
 
-
+ 
   <script src='/angular/angular.js'></script>
   <script src='/angular-route/angular-route.js'></script>
+  <script src="/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src='client/app.js'></script>
   <script src='client/mainController.js'></script>
+  <script src='client/postForm/formController.js'></script>
   </body>
 
   <footer>
