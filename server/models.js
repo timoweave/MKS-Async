@@ -5,7 +5,7 @@ var config = require('./config');
  * 1. mongoose connection to mongo
  * 2. mongoose schemas, models
  * 3. express restful api to mogoose
- * 4. export models and routers 
+ * 4. export models and routers
  */
 
 //////////////////////////////////////////////////////
@@ -30,24 +30,24 @@ db.connection.once('open', function() {
  */
 
 var UserSchema = mongoose.Schema({
-  username : String,
-  email : String,
-  password : String,
-  firstName : String,
-  lastName : String,
-  comments : [Object] // to be define {}
+  username: String,
+  email: String,
+  password: String,
+  firstName: String,
+  lastName: String,
+  comments: [Object] // to be define {}
 }, {
-  timestamps: { createdAt: 'created_at', updatedAt : 'updated_at' }
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
 
 var PostSchema = mongoose.Schema({
   title: String,
   description: String,
-  price : Number,
+  price: Number,
   postedByUser: { type: mongoose.Schema.Types.ObjectId, ref: 'UserSchema'}
 }, {
-  timestamps: { createdAt: 'created_at', updatedAt : 'updated_at' }
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
 var UserSequence = require('mongoose-sequence');
@@ -101,7 +101,7 @@ router
   });
 })
 .post(function(req, res) {
-  console.log("post /posts",  req.body);
+  console.log('post /posts', req.body);
   var post = new PostModel(req.body);
   post.save(function() {
     res.status(200).json(post);
@@ -125,7 +125,7 @@ router
  */
 
 module.exports = {
-  User : UserModel,
-  Post : PostModel,
-  Router : router
-}
+  User: UserModel,
+  Post: PostModel,
+  Router: router
+};

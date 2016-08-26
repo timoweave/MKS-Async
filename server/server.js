@@ -21,16 +21,16 @@ app.use(bodyParser.json());
 
 app.use('/api', models.Router);
 
-app.get('/', function(req, res){
-	res.sendFile(path.resolve('../public/index.html'));
-})
+app.get('/', function(req, res) {
+	                                        res.sendFile(path.resolve('../public/index.html'));
+});
 
-app.post('/', function(req, res){
+app.post('/', function(req, res) {
 
-	var something = req.body.something;
+	                                        var something = req.body.something;
 	//do something with 'something'
 
-})
+});
 
-console.log('ASYNC group server listening on 3000')
+console.log('ASYNC group server listening on 3000');
 app.listen(3000);
