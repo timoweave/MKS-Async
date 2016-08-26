@@ -8,7 +8,7 @@ var app = express();
 
 // app.set('views', __dirname + '/views');
 // app.set('view engine', 'html');
-
+app.set('port', (process.env.PORT) || 3000);
 app.use(morgan('combined'));
 
 app.use(express.static(path.resolve('../public')));
@@ -32,7 +32,7 @@ app.post('/', function(req, res) {
 
 });
 
-var server = app.listen(3000, function() {
+var server = app.listen(app.get('port'), function() {
   console.log(chalk.green('OK'), 'server', server.address().port);
 });
 
