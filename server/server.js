@@ -12,7 +12,7 @@ app.set('port', (process.env.PORT) || 3000);
 app.use(morgan('combined'));
 
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(express.static(path.join(__dirname,'./bower_components')));
+app.use(express.static(path.join(__dirname,'../bower_components')));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
