@@ -47,9 +47,11 @@ var UserSchema = mongoose.Schema({
 
 
 var PostSchema = mongoose.Schema({
-  title: String,
-  description: String,
+  name: String,
+  school: String,
+  major: String,
   price: Number,
+  description: String,
   postedByUser: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'UserSchema'
