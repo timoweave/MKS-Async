@@ -1,12 +1,31 @@
 angular.module('async.formController', [])
 
-.controller('FormController', function($scope, $http) {
+.controller('FormController', function($scope, $http, Modal, $window) {
 
   $scope.submit = function() {
-    //submit info.
+
+    $scope.input = {
+      title: this.title,
+      name: this.name,
+      school: this.school,
+      major: this.major,
+      price: this.price,
+      description: this.description
+      
+    };
+
+    Modal.createAd($scope.input)
+    .success(function(){
+      console.log("POST request data:", $scope.input);
+      $window.location.reload();
+    })
+    .error(function(err){
+      console.log("Error: ", err);
+    })
   };
 
   $scope.cancel = function() {
+    console.log($scope.$parent);
     $scope.$parent.$dismiss();
   };
 
