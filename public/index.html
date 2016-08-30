@@ -31,13 +31,9 @@
     </div>
     <hr>
 
-    <div ng-controller='AdsController' ng-init='getAds()'>
-      <table border = "1px">
-        <tr ng-repeat='post in ads'>
-        <td>
-        {{post}}
-        </td>
-        </tr>
+    <div ng-init='getAds()'>
+      <table border = "1px" ng-repeat='post in ads' provider-ads = 'post'>
+
       </table>
 
     </div>
