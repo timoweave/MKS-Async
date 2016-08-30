@@ -12,19 +12,28 @@
     <nav>
       <div>
         <h1>future insight</h1>
-        <button ng-click='openForm()'>Add a listing</button>
+        <button class='btn btn-success' ng-click='openForm()'>Add a listing</button>
       </div>
     </nav>
 
     <hr>
 
-    <div>
-      <form>
-        <input type='text' name='school' value='search school...'>
-        <input type='text' name='major' value='major?'>
+    <div class='container-fluid'>
+      <div class='control-group controls searchBar'>
+        <div class='row'>
+        <div class='col-md-5'>        
+          <input class="form-control" type='text' name='school' placeholder='search school...'>
+        </div>
 
-        <button>Search</button>
-      </form>
+        <div class='col-md-5'>         
+          <input class="form-control" type='text' name='major' placeholder='major?'>
+        </div>
+        
+        <div class='col-md-2'>
+          <button class="btn btn-success btn-block" type='button'>Search</button>
+        </div>
+        </div>
+      </div>
     </div>
 
     <div ng-view></div>

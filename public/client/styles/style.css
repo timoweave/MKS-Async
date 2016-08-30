@@ -80,4 +80,15 @@ input {
   
 }
 
+.searchBar{
+  text-align: center;
+  padding: 0 10% 0 10%;
+}
 
+.col-md-5{
+  padding: 0;
+}
+
+.col-md-2{
+  padding: 0;
+}

@@ -17,8 +17,8 @@ var mongoose = require('mongoose');
 var chalk = require('chalk');
 
 // var db = mongoose.connect(config.mongoose.local);  // NOTE: need to run mongod on localhost
-// var url = config.mongoose.local;
-var url = config.mongoose.mlab;
+var url = config.mongoose.local;
+// var url = config.mongoose.mlab;
 var db = mongoose.connect(url);
 db.connection.on('error', function() {
   console.log(chalk.red('NO'), 'mongoose', JSON.stringify(url));

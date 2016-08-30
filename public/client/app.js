@@ -12,5 +12,9 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
   // .otherwise({
   //  redirectTo: '/providerList'
   // })
-});
+})
+
+.factory('Modal', function($http){
+
+})
 
