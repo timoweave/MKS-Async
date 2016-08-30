@@ -4,6 +4,7 @@ angular.module('async.formController', [])
 
   $scope.submit = function() {
     //submit info.
+    alert(this.name);
   };
 
   $scope.cancel = function() {
