@@ -16,5 +16,17 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
 
 .factory('Modal', function($http){
 
+  var createAd = function(input){
+    return $http({
+      method: 'POST',
+      url: '/api/posts',
+      data: input
+    });
+  };
+  
+  return{
+    createAd: createAd
+  }
+
 })
 
