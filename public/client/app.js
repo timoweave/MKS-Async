@@ -28,4 +28,22 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
     createAd: createAd
   };
 
+}])
+
+.factory('Ads', ['$http', function($http) {
+
+  var getAds = function() {
+    return $http({
+        method: 'GET',
+        url: 'api/posts',
+      })
+      .then(function(resp) {
+        return resp.data;
+      });
+  };
+
+  return {
+    getAds: getAds
+  };
 }]);
+

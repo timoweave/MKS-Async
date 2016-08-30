@@ -7,6 +7,21 @@ angular.module('async.mainController', ['ui.bootstrap'])
       controller: 'FormController'
     });
   };
+
+}])
+
+.controller('AdsController', ['$scope', '$uibModal', 'Ads', function($scope, $uibModal, Ads) {
+  $scope.title = "Hello World";
+  $scope.ads = {};
+
+  $scope.getAds = function() {
+    Ads.getAds()
+      .then(function(data) {
+        $scope.ads = data;
+      })
+      .catch(function(err) {
+        console.eror(err);
+      });
+  };
+
 }]);
-
-
