@@ -31,10 +31,11 @@
     </div>
     <hr>
 
-    <div ng-init='getAds()'>
-      <table border = "1px" ng-repeat='post in ads' provider-ads = 'post'>
-
-      </table>
+    <div class="row" ng-init="getAds()" style="padding-left: 25px; padding-right: 25px">
+      
+      <div class="col-xs-6 col-md-2" ng-repeat='post in ads' provider-ads = 'post'></div>
+      
+      </div>
 
     </div>
 
