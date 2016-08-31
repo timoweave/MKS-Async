@@ -63,7 +63,7 @@ var BookingSchema = mongoose.Schema({
 var CommentSchema = mongoose.Schema({
   comment: String,
   postId: { type: mongoose.Schema.Types.ObjectId, ref: 'PostSchema' },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'UserSchema' }  
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'UserSchema' }
 }, {
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });

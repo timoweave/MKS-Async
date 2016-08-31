@@ -3,6 +3,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+//       CONCATENATE THE FILES IN SRC, OUTPUT TO DEST
     concat: {
       dist: {
         src: [
@@ -12,6 +13,7 @@ module.exports = function(grunt) {
       }
     },
 
+//        UNCOMMENT WHEN TESTS ARE READY
     // mochaTest: {
     //   test: {
     //     options: {
@@ -21,12 +23,16 @@ module.exports = function(grunt) {
     //   }
     // },
 
+
+//            RUN NODEMON ON THE SERVER
     nodemon: {
       dev: {
         script: 'server/server.js'
       }
     },
 
+
+//           MINIFY THE ALREADY CONCATENATED VERSION OF THE FILES
     uglify: {
       build: {
         src: 'public/dist/production.js',
@@ -34,20 +40,23 @@ module.exports = function(grunt) {
       }
     },
 
-    // jshint: {
-    //   files: [
-    //     'Gruntfile.js', 'public/client/*.js'
-    //   ],
-    //   options: {
-    //     force: 'true',
-    //     jshintrc: '.jshintrc',
-    //     ignores: [
-    //       'public/lib/**/*.js',
-    //       'public/dist/**/*.js'
-    //     ]
-    //   }
-    // },
+//          CHECK ALL .JS FILES FOR SYNTAX ERRORS
+    jshint: {
+      files: [
+        'Gruntfile.js', 'public/client/**/*.js', 'server/*.js'
+      ],
+      options: {
+        force: 'true',
+        // jshintrc: '.jshintrc', uncomment IF we decide to specify what to lint for within .jshintrc
+        ignores: [
+          'public/lib/**/*.js',
+          'public/dist/**/*.js'
+        ]
+      }
+    },
 
+
+//        EQUIVALENT TO UGLIFY-FOR-JS, BUT FOR CSS
     cssmin: {
       dist:{
         options: {
@@ -59,6 +68,8 @@ module.exports = function(grunt) {
       }
     },
 
+
+// will continuously monitor the 'files' and perform the 'tasks' if the files are changed
     watch: {
       scripts: {
         files: [
@@ -66,16 +77,18 @@ module.exports = function(grunt) {
           'public/lib/**/*.js',
         ],
         tasks: [
+          'jshint',
           'concat',
           'uglify'
         ]
       },
       css: {
         files: 'public/client/styles/*.css',
-        tasks: ['cssmin']
+        tasks: ['jshint','cssmin']
       }
     },
 
+// We can add additionally terminal command lines here
     shell: {
       prodServer: {
           command: 'git push heroku master'
@@ -84,7 +97,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  // grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -94,6 +107,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
+    // This allows grunt to continue running simultaneously with a node instance by funneling their stdout's together
     var nodemon = grunt.util.spawn({
          cmd: 'grunt',
          grunt: true,
@@ -102,7 +116,7 @@ module.exports = function(grunt) {
     nodemon.stdout.pipe(process.stdout);
     nodemon.stderr.pipe(process.stderr);
 
-    // grunt.task.run([ 'watch' ]);
+    grunt.task.run([ 'watch' ]);
   });
 
   ////////////////////////////////////////////////////
@@ -114,15 +128,15 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    // 'test', <-- uncomment once tests are written/ready
-    'concat', 'uglify', 'cssmin'
+    'lint', 'concat', 'uglify', 'cssmin'
   ]);
 
-  // grunt.registerTask('watch', ['watch']);
+  grunt.registerTask('look', ['watch']);
+
+  grunt.registerTask('lint', ['jshint']);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
-      // add your production server task here
         grunt.task.run([ 'shell:prodServer' ]);
     } else {
       grunt.task.run([ 'server-dev' ]);
