@@ -15,7 +15,7 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
 
 }])
 
-.factory('Modal', function($http){
+.factory('Modal', ['$http', function($http){
 
   var createAd = function(input){
     return $http({
@@ -27,8 +27,8 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
 
   return{
     createAd: createAd
-  }
+  };
 
-})
+}]);
 
 
