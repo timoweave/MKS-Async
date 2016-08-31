@@ -2,13 +2,15 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var path = require('path');
+var config = require('./config');
 var models = require('./models');
 var chalk = require('chalk');
 var app = express();
 
 // app.set('views', __dirname + '/views');
 // app.set('view engine', 'html');
-app.set('port', (process.env.PORT) || 3000);
+app.set('host', config.server.host);
+app.set('port', config.server.port);
 app.use(morgan('combined'));
 
 app.use(express.static(path.join(__dirname, '../public')));
@@ -32,7 +34,13 @@ app.post('/', function(req, res) {
 
 });
 
-var server = app.listen(app.get('port'), function() {
-  console.log(chalk.green('OK'), 'server', server.address().port);
-});
+var server = app.listen(app.get('port'), app.get('host'), serve_up);
 
+function serve_up() {
+  var address = server.address().address;
+  if (server.address().address === '::') {
+    address = '[' + server.address().address + ']';
+  }
+  address += ':' + server.address().port;
+  console.log(chalk.green('OK'), 'node server', chalk.blue(address));
+}

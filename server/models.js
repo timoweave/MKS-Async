@@ -16,14 +16,18 @@ var config = require('./config');
 var mongoose = require('mongoose');
 var chalk = require('chalk');
 
-var url = config.mongoose.local;
-// var url = config.mongoose.mlab;
-var db = mongoose.connect(url);
+var db = mongoose.connect(config.mongoose.url /* --mlab (cloud), --localhost(data/db) */);
+
 db.connection.on('error', function() {
-  console.log(chalk.red('NO'), 'mongoose', JSON.stringify(url));
+  var address = JSON.stringify(config.mongoose.url);
+  address = address.slice(1, address.length - 1);
+  console.log(chalk.red('NO'), 'mongoose server', chalk.bgRed(address));
 });
 db.connection.once('open', function() {
-  console.log(chalk.green('OK'), 'mongoose', JSON.stringify(url));
+  var address = JSON.stringify(config.mongoose.url);
+  address = address.slice(1, address.length - 1);
+  console.log(chalk.green('OK'), 'mongoose server', chalk.blue(address));
+  // schema, models, and router should be here
 });
 
 //////////////////////////////////////////////////////
@@ -37,14 +41,13 @@ var UserSchema = mongoose.Schema({
   password: String,
   firstName: String,
   lastName: String,
-  comments: [Object] // to be define {}
+  comments: [ { ref: 'Comment', type: mongoose.Schema.Types.ObjectId } ]
 }, {
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   }
 });
-
 
 var PostSchema = mongoose.Schema({
   title: String,
@@ -52,22 +55,8 @@ var PostSchema = mongoose.Schema({
   school: String,
   major: String,
   price: Number,
-  email: String,
   description: String,
-  postedByUser: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'UserSchema'
-  }
-}, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
-
-var BookingSchema = mongoose.Schema({
-  postId: Number,
-  userId: Number
+  postedByUserId: { ref: 'User', type: mongoose.Schema.Types.ObjectId }
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -77,8 +66,18 @@ var BookingSchema = mongoose.Schema({
 
 var CommentSchema = mongoose.Schema({
   comment: String,
-  postId: { type: mongoose.Schema.Types.ObjectId, ref: 'PostSchema' },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'UserSchema' }
+  postId: { ref: 'Post', type: mongoose.Schema.Types.ObjectId },
+  userId: { ref: 'User', type: mongoose.Schema.Types.ObjectId }
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
+});
+
+var BookingSchema = mongoose.Schema({
+  postId: { ref : "Post", type : Number },
+  userId: { ref : "User", type : Number }
 }, {
   timestamps: {
     createdAt: 'created_at',
