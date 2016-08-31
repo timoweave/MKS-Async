@@ -51,6 +51,7 @@ var PostSchema = mongoose.Schema({
   school: String,
   major: String,
   price: Number,
+  email: String,
   description: String,
   postedByUser: {
     type: mongoose.Schema.Types.ObjectId,
