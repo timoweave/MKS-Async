@@ -1,6 +1,6 @@
 angular.module('async.formController', [])
 
-.controller('FormController', function($scope, $http, Modal, $window) {
+.controller('FormController', ['$scope', '$http', 'Modal', '$window', function($scope, $http, Modal, $window) {
 
   $scope.submit = function() {
 
@@ -11,7 +11,6 @@ angular.module('async.formController', [])
       major: this.major,
       price: this.price,
       description: this.description
-      
     };
 
     Modal.createAd($scope.input)
@@ -29,4 +28,4 @@ angular.module('async.formController', [])
     $scope.$parent.$dismiss();
   };
 
-});
+}]);

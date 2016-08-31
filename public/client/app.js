@@ -1,7 +1,6 @@
 angular.module('async', ['async.mainController', 'async.formController', 'ngRoute', 'ui.bootstrap'])
 
-
-.config(function($routeProvider) {
+.config(['$routeProvider', function($routeProvider) {
   // $routeProvider
 
   // .when('/providerList', {
@@ -12,9 +11,10 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
   // .otherwise({
   //  redirectTo: '/providerList'
   // })
-})
 
-.factory('Modal', function($http){
+}])
+
+.factory('Modal', ['$http', function($http){
 
   var createAd = function(input){
     return $http({
@@ -23,10 +23,9 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
       data: input
     });
   };
-  
+
   return{
     createAd: createAd
-  }
+  };
 
-})
-
+}]);
