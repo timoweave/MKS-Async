@@ -9,7 +9,7 @@ var app = express();
 
 // app.set('views', __dirname + '/views');
 // app.set('view engine', 'html');
-app.set('host', config.server.host);
+// app.set('host', config.server.host);
 app.set('port', config.server.port);
 app.use(morgan('combined'));
 
@@ -34,12 +34,12 @@ app.post('/', function(req, res) {
 
 });
 
-var server = app.listen(app.get('port'), app.get('host'), serve_up);
+var server = app.listen(app.get('port'), serve_up);
 
 function serve_up() {
   var address = server.address().address;
   if (server.address().address === '::') {
-    address = '[' + server.address().address + ']';
+    address = 'localhost';
   }
   address += ':' + server.address().port;
   console.log(chalk.green('OK'), 'node server', chalk.blue(address));
