@@ -8,7 +8,9 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "postinstall": "bower install",
+    "postinstall": "bower install && npm run build_grunt",
+    "build_grunt" : "grunt build",
+    "build_watch" : "grunt watch",
     "mongo_daemon": "mkdir -p data/db && mongod --dbpath data/db",
     "json_server": "json-server server/models.json",
     "test_karma": "karma start --browsers PhantomJS",
