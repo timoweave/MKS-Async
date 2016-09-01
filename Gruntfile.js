@@ -9,19 +9,21 @@ module.exports = function(grunt) {
         src: [
           'public/client/**/*.js',
         ],
-        dest: 'public/dist/production.js',
+        dest: 'public/dist/production.js'
       }
     },
 
-//        UNCOMMENT WHEN TESTS ARE READY
-    // mochaTest: {
-    //   test: {
-    //     options: {
-    //       reporter: 'spec'
-    //     },
-    //     src: ['test/**/*.js']
-    //   }
-    // },
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec',
+          captureFile: 'spec/mocha_test_results.txt',
+          quiet: false,
+          clearRequireCache: false
+        },
+        src: ['spec/**/*.js']
+      }
+    },
 
 
 //            RUN NODEMON ON THE SERVER
@@ -73,8 +75,8 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
-          'public/client/**/*.js',
-          'public/lib/**/*.js',
+          'Gruntfile.js',
+          'public/client/**/*.js'
         ],
         tasks: [
           'jshint',

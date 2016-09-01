@@ -1,50 +1,113 @@
 {
-    "posts": [
-        { "id": 0,
-          "title": "chemistry tour",
-          "description" : "Pulvinar etiam non quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet, consectetur adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla.",
-          "price" : 20.0,
-          "userId": 0
-        },
-        { "id": 1,
-          "title": "modern art school",
-          "description" : "Non pulvinar neque laoreet suspendisse interdum consectetur libero! Mus mauris vitae ultricies leo integer malesuada nunc vel risus commodo viverra maecenas accumsan, lacus vel facilisis volutpat, est velit egestas dui!",
-          "price" : 40.0,
-          "userId": 1
-        }
-    ],
-    "comments": [
-        { "id": 0,
-          "comment": "boring guide",
-          "postId": 0,
-          "userId": 1},
-        { "id": 1,
-          "comment": "awesome tour",
-          "postId": 1,
-          "userId": 0}
+    "schools" : [
+        { "id" : 0, "name" : "Stanford University", "address" : "stanford ave",
+          "city" : "Stanford", "state" : "CA"},
+        { "id" : 1, "name" : "University of California, Berkeley", "address" : "college ave",
+          "city" : "Berkeley", "state" : "CA"},
+        {"id": 1, "name" : "George Washington University", "address": "washing st",
+         "city" :"Washington", "state" : "DC"},
+        {"id": 1, "name" : "California Polytechnic State University", "address": "polyer ave",
+         "city" : "San Luis Obispo", "state" : "CA"},
+        {"id": 1, "name" : "Carnegie Mellon University", "address": "mellow rd",
+         "city" :"Pittsburgh", "state" : "PA"},
+        {"id": 1, "name" : "Cornell University", "address": "corner dr",
+         "city" :"Ithaca", "state" : "NY"},
+        {"id": 1, "name" : "Columbia University", "address": "collectible ave",
+         "city" :"New York", "state" : "NY"},
+        {"id": 1, "name" : "Duke University", "address": "noble pl",
+         "city" :"Durham", "state" : "NC"},
+        {"id": 1, "name" : "Univeristy of Michigan", "address": "college dr",
+         "city" :"Ann Arbor", "state" : "MI"},
+        {"id": 1, "name" : "Georgia Institute of Technology", "address": "atlantic dr",
+         "city" :"Atlanta", "state" : "GA"},
+        {"id": 1, "name" : "McGill University", "address": "Sherbook",
+         "city" :"Montreal", "state" : "QC"},
+        {"id": 1, "name" : "University of Toronto", "address": "bloor st",
+         "city" :"Toronto", "state" : "ON"},
+        {"id": 1, "name" : "Queen's University", "address": "division rd",
+         "city" :"Kingston", "state" : "ON"},
+        {"id": 1, "name" : "University of Central Florida", "address": "central rd",
+         "city" :"Orlando", "state" : "FL"}
     ],
     "users": [
-        {
-            "id": 0,
-            "username": "ewest",
-            "picture" : "TBD",
-            "school" : "University of California, Berkely",
-            "email": "ewest@yahoo.com",
-            "firstname" : "Elizabeth",
-            "lastname" : "West"
+        { "id": 0, "username": "ewest", "password" : "hello", "email": "ewest@yahoo.com",
+          "firstName" : "Elizabeth", "lastName" : "West"
         },
-        {
-            "id": 1,
-            "username": "jking",
-            "picture" : "TBD",            
-            "school" : "Stanford University",
-            "email": "jking@gmail.com",
-            "firstname" : "James",
-            "lastname" : "King"
+        { "id": 1, "username": "jking", "password" : "hello", "email": "jking@gmail.com",
+          "firstName" : "James", "lastName" : "King"
+        },
+        { "id": 2, "username": "kmorita", "password" : "hello", "email": "kmorita@gmail.com",
+          "firstName" : "Kris", "lastName" : "Morita"
+        },
+        { "id": 3, "username": "fcarboni", "password" : "hello", "email": "fcarboni@gmail.com",
+          "firstName" : "Francina", "lastName" : "Carboni"
+        },
+        { "id": 4, "username": "mbrumer", "password" : "hello", "email": "mbrumer@gmail.com",
+          "firstName" : "Mazie", "lastName" : "Brumer"
+        },
+        { "id": 5, "username": "kgeiger", "password" : "hello", "email": "kgeiger@gmail.com",
+          "firstName" : "Kristopher", "lastName" : "Geiger"
+        },
+        { "id": 6, "username": "treiter", "password" : "hello", "email": "treiter@gmail.com",
+          "firstName" : "Tillie", "lastName" : "Reiter"
+        },      
+        { "id": 7, "username": "mfaucher", "password" : "hello", "email": "mfaucher@gmail.com",
+          "firstName" : "Marcy", "lastName" : "Faucher"
+        },
+        { "id": 8, "username": "rradabaugh", "password" : "hello", "email": "rradabaugh@gmail.com",
+          "firstName" : "Robena", "lastName" : "Radabaugh"
+        },
+        { "id": 9, "username": "fdieter", "password" : "hello", "email": "fdieter@gmail.com",
+          "firstName" : "Fermina", "lastName" : "Dieter"
+        },
+        { "id": 10, "username": "lcorbeil", "password" : "hello", "email": "lcorbeil@gmail.com",
+          "firstName" : "Luke", "lastName" : "Corbeil"
+        },
+        { "id": 11, "username": "ssottile", "password" : "hello", "email": "ssottile@gmail.com",
+          "firstName" : "Sheri", "lastName" : "Sottile"
+        },
+        { "id": 12, "username": "ehellen", "password" : "hello", "email": "ehellen@gmail.com",
+          "firstName" : "Eloy", "lastName" : "Hellen"
+        }
+    ],
+    "posts": [
+        { "id": 0, "title": "chemistry tour", "major" : "chemistry", "price" : 20.0,
+          "description" : "chemistry, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 1, "title": "modern art school", "major" : "liberal arts", "price" : 40.0,
+          "description" : "modern art, Non pulvinar neque laoreet suspendisse interdum consectetur libero"
+        },
+        { "id": 2, "title": "computer science", "major" : "computer science", "price" : 20.0,
+          "description" : "computer science, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 3, "title": "mathematic", "major" : "mathematic", "price" : 20.0,
+          "description" : "mathematic, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 4, "title": "architecture", "major" : "architecture", "price" : 20.0,
+          "description" : "architecture, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 5, "title": "mechanical engineering", "major" : "mechanical", "price" : 20.0,
+          "description" : "mechanical, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 6, "title": "economic department", "major" : "economic", "price" : 20.0,
+          "description" : "economic, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 7, "title": "altheltic deparment", "major" : "altheltic", "price" : 20.0,
+          "description" : "altheltic, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 8, "title": "english", "major" : "altheltic", "price" : 20.0,
+          "description" : "engilish, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 9, "title": "medicine", "major" : "medical school", "price" : 20.0,
+          "description" : "medicine, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
         }
     ],
     "bookings" : [
-        { "postId" : 0, "userId" : 1 },
-        { "postId" : 1, "userId" : 0 }
+        { "id" : 0, "time" : "Wed Aug 31 18:36:27 PDT 2016", "place" : "berkeley library" },
+        { "id" : 1, "time" : "Wed Aug 31 18:36:27 PDT 2016", "place" : "stanford student center" }
+    ],
+    "comments": [
+        { "id": 0, "comment": "boring guide" },
+        { "id": 1, "comment": "awesome tour" }
     ]
 }
