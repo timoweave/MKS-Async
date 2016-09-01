@@ -47,6 +47,7 @@ var UserSchema = mongoose.Schema({
 
 
 var PostSchema = mongoose.Schema({
+  title: String,
   name: String,
   school: String,
   major: String,

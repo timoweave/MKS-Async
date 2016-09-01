@@ -20,7 +20,7 @@ angular.module('async.formController', [])
     })
     .error(function(err){
       console.log("Error: ", err);
-    })
+    });
   };
 
   $scope.cancel = function() {

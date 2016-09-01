@@ -1,0 +1,26 @@
+<div>
+    <div class='modal-header'>
+        <h2>{{adModalData.title}}</h2>
+    </div>
+    <div class='modal-body'>
+        <h4>Your name:</h4>
+        <p>{{adModalData.name}}</p>
+
+        <h4>School or University:</h4>
+        <p>{{adModalData.school}}</p>
+
+        <h4>Major:</h4>
+        <p>{{adModalData.major}}</p>
+
+        <h4>Price (hourly):</h4>
+        <p>${{adModalData.price}}</p>
+
+        <h4>Description:</h4>
+        <p>{{adModalData.description}}</p>
+    </div>
+
+    <div class='modal-footer'>
+        <button type='submit' class="btn btn-success">Book</button>
+        <button class="btn btn-outline-default" ng-click='cancel()'>Cancel</button>
+    </div>
+</div>
