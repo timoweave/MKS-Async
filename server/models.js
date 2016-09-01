@@ -17,8 +17,8 @@ var UserSchema = Schema({
   password: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  schools: [ { ref: 'School', type : ObjectId } ],
-  comments: [ { ref: 'Comment', type: ObjectId } ]
+  schools: [ { ref: 'School', type : ObjectId, required : false } ],
+  comments: [ { ref: 'Comment', type: ObjectId, required : false } ]
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -27,12 +27,14 @@ var UserSchema = Schema({
 });
 
 var PostSchema = Schema({
-  title: { type: String, required: true },
-  major: { type: String, required: true },
+  title: { type: String , required: true },
+  major: { type: String , required: true },
   description: { type: String, required: true },
   price: Number,
-  school: { ref: 'School', type: ObjectId },
-  postedByUserId: { ref: 'User', type: ObjectId }
+  name : { type: String },
+  school : { type: String, required : false },
+  // school: { ref: 'School', type: ObjectId, required : false },
+  postedByUserId: { ref: 'User', type: ObjectId, required : false }
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -54,8 +56,8 @@ var SchoolSchema = Schema({
 
 var CommentSchema = Schema({
   comment: { type: String, required: true },
-  postId: { ref: 'Post', type: ObjectId },
-  userId: { ref: 'User', type: ObjectId }
+  postId: { ref: 'Post', type: ObjectId, required : false },
+  userId: { ref: 'User', type: ObjectId, required : false }
 }, {
   timestamps: {
     createdAt: 'created_at',
