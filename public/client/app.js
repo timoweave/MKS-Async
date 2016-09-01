@@ -42,8 +42,11 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
       });
   };
 
+  var adModalData = null;
+
   return {
-    getAds: getAds
+    getAds: getAds,
+    adModalData: adModalData
   };
 }]);
 

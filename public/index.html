@@ -33,7 +33,7 @@
 
     <div ng-controller="AdsController" class="row" ng-init="getAds()" style="padding-left: 25px; padding-right: 25px">
 
-      <div class="col-xs-6 col-md-2" ng-repeat='post in ads' provider-ads = 'post'></div>
+      <provider-ads class="col-xs-6 col-md-2" ng-repeat='post in ads' item = 'post'></provider-ads>
 
       </div>
 
