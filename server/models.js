@@ -5,8 +5,11 @@
 var config = require('./config');
 var chalk = require('chalk');
 var mongoose = require('mongoose');
+var q = require('q');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
+
+mongoose.Promise = require('q').Promise;
 
 var UserSchema = Schema({
   username: { type: String, required: true },

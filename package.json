@@ -39,6 +39,7 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-unicorn-reporter": "^0.1.4",
     "mocha": "^1.20.1",
+    "supertest": "^2.0.0",
     "morgan": "^1.7.0",
     "nodemon": "^1.10.2",
     "sinon": "^1.17.5"
@@ -65,7 +66,7 @@
     "morgan": "^1.1.1",
     "passport": "^0.2.0",
     "passport-local": "^1.0.0",
-    "q": "^1.0.1",
+    "q": "^1.4.1",
     "request": "^2.36.0",
     "yahoo-finance": "0.2.13"
   }
