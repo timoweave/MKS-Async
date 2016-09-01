@@ -10,6 +10,7 @@
     "start": "node server/server.js",
     "postinstall": "bower install && npm run build_codes",
     "monitor_codes": "node server/server.js --testing=${USER}",
+    "init_samples": "node server/models.samples.js",
     "build_codes": "grunt build",
     "watch_codes": "grunt watch",
     "test_codes": "grunt test",

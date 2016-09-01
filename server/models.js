@@ -272,6 +272,6 @@ module.exports = {
   School: SchoolModel,
   Comment: CommentModel,
   Booking: BookingModel,
-  crud : crudify_models /* Promise */,
-  restful : restify_cruds /* Promise */
+  crudify_models : crudify_models /* Promise */,
+  restify_cruds : restify_cruds /* Promise */
 };

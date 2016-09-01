@@ -15,7 +15,7 @@ var server = require('../server/server');
 var supertest = require('supertest');
 var request = supertest.agent(server);
 
-describe("database model", function() {
+describe("mongoose model", function() {
   /*
   var cruds = undefined;
   var models = undefined;
@@ -25,7 +25,7 @@ describe("database model", function() {
     cruds = new Promise(models.restify_cruds);
     cruds.then(function (m) {
       models = m;
-    });
+`    });
      */
   });
 
@@ -114,7 +114,14 @@ describe("database model", function() {
   });
 });
 
-describe("restful api", function() {
+xdescribe("mongo database", function() { // crud api
+  it("", function(done) {
+    expect(true).to.be.true;
+    done();
+  });
+});
+
+xdescribe("restful api", function() { // rest api
 
   beforeEach(function() {
     
