@@ -36,11 +36,12 @@ db.connection.once('open', function() {
  */
 
 var UserSchema = mongoose.Schema({
-  username: String,
-  email: String,
-  password: String,
-  firstName: String,
-  lastName: String,
+  username: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  schools: [ { ref: 'School', type : mongoose.Schema.Types.ObjectId } ],
   comments: [ { ref: 'Comment', type: mongoose.Schema.Types.ObjectId } ]
 }, {
   timestamps: {
@@ -50,12 +51,11 @@ var UserSchema = mongoose.Schema({
 });
 
 var PostSchema = mongoose.Schema({
-  title: String,
-  name: String,
-  school: String,
-  major: String,
+  title: { type: String, required: true },
+  major: { type: String, required: true },
   price: Number,
-  description: String,
+  description: { type: String, required: true },
+  school: { ref: 'School', type: mongoose.Schema.Types.ObjectId },
   postedByUserId: { ref: 'User', type: mongoose.Schema.Types.ObjectId }
 }, {
   timestamps: {
@@ -64,8 +64,20 @@ var PostSchema = mongoose.Schema({
   }
 });
 
+var SchoolSchema = mongoose.Schema({
+  name: { type: String, required: true },
+  address: { type: String, required: true },
+  city: { type: String, required: true},
+  state: { type : String, required: true }
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
+});
+
 var CommentSchema = mongoose.Schema({
-  comment: String,
+  comment: { type: String, required: true },
   postId: { ref: 'Post', type: mongoose.Schema.Types.ObjectId },
   userId: { ref: 'User', type: mongoose.Schema.Types.ObjectId }
 }, {
@@ -76,8 +88,10 @@ var CommentSchema = mongoose.Schema({
 });
 
 var BookingSchema = mongoose.Schema({
-  postId: { ref : "Post", type : Number },
-  userId: { ref : "User", type : Number }
+  time: { type: Date, required: true },
+  place: { type: String, required: true },
+  postId: { ref: 'Post', type: Number },
+  userId: { ref: 'User', type: Number }
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -87,6 +101,7 @@ var BookingSchema = mongoose.Schema({
 
 var UserSequence = require('mongoose-sequence');
 var PostSequence = require('mongoose-sequence');
+var SchoolSequence = require('mongoose-sequence');
 var BookingSequence = require('mongoose-sequence');
 var CommentSequence = require('mongoose-sequence');
 
@@ -95,6 +110,9 @@ UserSchema.plugin(UserSequence, {
 });
 PostSchema.plugin(PostSequence, {
   'inc_field': 'postId'
+});
+SchoolSchema.plugin(PostSequence, {
+  'inc_field': 'schoolId'
 });
 BookingSchema.plugin(UserSequence, {
   'inc_field': 'bookingId'
@@ -105,6 +123,7 @@ CommentSchema.plugin(PostSequence, {
 
 var UserModel = mongoose.model('User', UserSchema);
 var PostModel = mongoose.model('Post', PostSchema);
+var SchoolModel = mongoose.model('School', SchoolSchema);
 var BookingModel = mongoose.model('Booking', BookingSchema);
 var CommentModel = mongoose.model('Comment', CommentSchema);
 
@@ -116,17 +135,29 @@ var CommentModel = mongoose.model('Comment', CommentSchema);
 var express = require('express');
 var router = express.Router();
 
-router
-  .route('/users')
+addRouter(router, UserModel, '/users', 'userId');
+addRouter(router, PostModel, '/posts', 'postId');
+addRouter(router, SchoolModel, '/schools', 'schoolId');
+addRouter(router, CommentModel, '/comments', 'commentId');
+addRouter(router, BookingModel, '/bookings', 'bookingId');
+
+function addRouter(router, model, collection, indexing) {
+
+  router
+  .route(collection)
   .get(function(req, res) {
-    console.log('get /users');
-    UserModel.find({}, function(err, users) {
-      res.status(200).json(users);
+    console.log(chalk.magenta('get'), collection);
+    model.find({}, function(err, users) {
+      if (err) {
+        res.status(404).end('cannot find');
+      } else {
+        res.status(200).json(users);
+      }
     });
   })
   .post(function(req, res) {
-    console.log('post /users', req.body);
-    var user = new UserModel(req.body);
+    console.log(chalk.magenta('post'), collection, req.body);
+    var user = new model(req.body);
     user.save(function(err) {
       if (err) {
         res.status(404).end('cannot save');
@@ -136,96 +167,66 @@ router
     });
   });
 
-router
-  .route('/users/:id')
-  .get(function(req, res) {
-    console.log('get /users/:id', req.params.id);
-    UserModel.find({
-      userId: req.params.id
-    }, function(err, users) {
-      res.status(200).json(users);
-    });
+  router.param(indexing, function(req, res, next, id) {
+    req.params[indexing] = id;
+    next();
   });
 
-router
-  .route('/posts')
+  var item = collection + '/:' + indexing; // + '(\\d+)';
+  router
+  .route(item)
   .get(function(req, res) {
-    PostModel.find(function(err, posts) {
-      res.status(200).json(posts);
+    console.log(chalk.magenta('get'), item, req.params[indexing]);
+    var filter = {};
+    filter[indexing] = req.params[indexing];
+    model.findOne(filter, function(err, data) {
+      if (err) {
+        res.status(404).end('cannot find the specify ' + indexing);
+      } else {
+        res.status(200).json(data);
+      }
     });
   })
-  .post(function(req, res) {
-    console.log('post /posts', req.body);
-    var post = new PostModel(req.body);
-    post.save(function() {
-      res.status(200).json(post);
+  .put(function(req, res) {
+    console.log(chalk.magenta('post'), item, req.params[indexing]);
+    var filter = {};
+    filter[indexing] = req.params[indexing];
+    model.findOne(filter, function(err_find, data) {
+      if (err_find) {
+        res.status(404).end('update fail: find fail, ' + indexing);
+      } else {
+        data.save(function(err_save) {
+          if (err_save) {
+            res.status(404).end('update fail: save fail');            
+          } else {
+            res.status(200).json(data); // 302?
+          }
+        });
+      }
     });
-  });
 
-router
-  .route('/posts/:id')
-  .get(function(req, res) {
-    console.log('get /post/:id', req.params.id);
-    UserModel.find({
-      postId: req.params.id
-    }, function(err, posts) {
-      res.status(200).json(posts);
-    });
-  });
-
-router
-  .route('/bookings')
-  .get(function(req, res) {
-    console.log('get /bookings');
-    BookingModel.find(function(err, body) {
-      res.status(200).json(body);
-    });
   })
-  .post(function(req, res) {
-    console.log('post /bookings', req.body);
-    var booking = new BookingModel(req.body);
-    booking.save(function() {
-      res.status(200).json(booking);
+  .delete(function(req, res) {
+    console.log(chalk.magenta('delete'), item, req.params[indexing]);
+    var filter = {};
+    filter[indexing] = req.params[indexing];
+    model.findOne(filter, function(err_find, data) {
+      if (err_find) {
+        res.status(404).end('delete fail: find fail, ' + indexing);
+      } else {
+        data.remove(function(err_save) {
+          if (err_save) {
+            res.status(404).end('delete fail: remove fail');            
+          } else {
+            res.status(200).json(data); // 302?
+          }
+        });
+      }
     });
   });
 
-router
-  .route('/bookings/:id')
-  .get(function(req, res) {
-    console.log('get /bookings/:id', req.params.id);
-    BookingModel.find({
-      bookingId: req.params.id
-    }, function(err, posts) {
-      res.status(200).json(posts);
-    });
-  });
-
-router
-  .route('/comments')
-  .get(function(req, res) {
-    console.log('get /comments');
-    CommentModel.find(function(err, body) {
-      res.status(200).json(body);
-    });
-  })
-  .post(function(req, res) {
-    console.log('post /comments', req.body);
-    var booking = new CommentModel(req.body);
-    booking.save(function() {
-      res.status(200).json(booking);
-    });
-  });
-
-router
-  .route('/comments/:id')
-  .get(function(req, res) {
-    console.log('get /comments/:id', req.params.id);
-    CommentModel.find({
-      bookingId: req.params.id
-    }, function(err, posts) {
-      res.status(200).json(posts);
-    });
-  });
+  return router;
+}
 
 //////////////////////////////////////////////////////
 /*
@@ -235,6 +236,7 @@ router
 module.exports = {
   User: UserModel,
   Post: PostModel,
+  School: SchoolModel,
   Comment: CommentModel,
   Booking: BookingModel,
   Router: router

@@ -14,7 +14,7 @@ app.set('port', config.server.port);
 app.use(morgan('combined'));
 
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(express.static(path.join(__dirname,'../bower_components')));
+app.use(express.static(path.join(__dirname, '../bower_components')));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -34,13 +34,11 @@ app.post('/', function(req, res) {
 
 });
 
-var server = app.listen(app.get('port'), serve_up);
-
-function serve_up() {
+var server = app.listen(app.get('port'), function serveUp() {
   var address = server.address().address;
   if (server.address().address === '::') {
     address = 'localhost';
   }
   address += ':' + server.address().port;
   console.log(chalk.green('OK'), 'node server', chalk.blue(address));
-}
+});

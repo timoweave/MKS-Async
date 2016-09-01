@@ -14,12 +14,12 @@ angular.module('async.formController', [])
     };
 
     Modal.createAd($scope.input)
-    .success(function(){
-      console.log("POST request data:", $scope.input);
+    .success(function() {
+      console.log('POST request data:', $scope.input);
       $window.location.reload();
     })
-    .error(function(err){
-      console.log("Error: ", err);
+    .error(function(err) {
+      console.log('Error: ', err);
     });
   };
 
