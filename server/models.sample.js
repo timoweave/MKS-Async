@@ -1,21 +1,25 @@
 var request = require('request');
 var jsonfile = require('jsonfile');
 
-var objfile = 'models.json';
+var config = require('./config');
+var url = config.mongoose.restfulApi();
 
-jsonfile.readFile(objfile, function(err, obj) {
-  console.dir(obj);
+insertSampleData(url, 'models.json');
 
-  var users = obj.users;
-  var posts = obj.posts;
-  var comments = obj.comments;
-  var bookings = obj.bookings;
-  var url = '';
+function insertSampleData(url, filename) { 
 
-  request('', function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-      console.log(body);
-    }
+  jsonfile.readFile(filename, function(err, obj) {
+    Object.keys(obj).forEach(function(key) {
+      obj[key].forEach(function(doc) {
+        delete doc.id;
+        var option = { 'method' : 'POST', 'uri' : url + '/' + key, 'json' : doc };
+        request(option, function(error, response, body) {
+          if (!error) {
+            console.log("ok", body);
+          }
+        });
+      });
+    });
   });
-});
+}
 

@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server/server.js",
     "postinstall": "bower install && npm run build_grunt",
-    "monitor_codes": "nodemon server/server.js",
+    "monitor_codes": "nodemon server/server.js --tester=${USER}",
     "build_codes": "grunt build",
     "watch_codes": "grunt watch",
     "test_codes": "grunt test",
@@ -17,7 +17,7 @@
     "mongo_cleanup": "rm -rf data/db",
     "json_server": "json-server server/models.json",
     "test_karma": "karma start --browsers PhantomJS",
-    "test_mocha": "mocha --watch --reporter spec spec/",
+    "test_mocha": "mocha --reporter spec spec/",
     "lint": "eslint --fix public server"
   },
   "author": "Sergey Potashnikov, Cindy Sun, Dana Li, Tim Shiu",

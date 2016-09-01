@@ -1,122 +1,10 @@
-
-////////////////////////////////////////////////////////////////
-/// models, schema
-
-var config = require('./config');
 var chalk = require('chalk');
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var ObjectId = Schema.Types.ObjectId;
+var config = require('./config');
+var crud = require('./crud');
 
-var UserSchema = Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  schools: [ { ref: 'School', type : ObjectId } ],
-  comments: [ { ref: 'Comment', type: ObjectId } ]
-}, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
+module.exports = new Promise(restify_models);
 
-var PostSchema = Schema({
-  title: { type: String, required: true },
-  major: { type: String, required: true },
-  description: { type: String, required: true },
-  price: Number,
-  school: { ref: 'School', type: ObjectId },
-  postedByUserId: { ref: 'User', type: ObjectId }
-}, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
-
-var SchoolSchema = Schema({
-  name: { type: String, required: true },
-  address: { type: String, required: true },
-  city: { type: String, required: true },
-  state: { type : String, required: true }
-}, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
-
-var CommentSchema = Schema({
-  comment: { type: String, required: true },
-  postId: { ref: 'Post', type: ObjectId },
-  userId: { ref: 'User', type: ObjectId }
-}, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
-
-var BookingSchema = Schema({
-  time: { type: Date, required: true },
-  place: { type: String, required: true },
-  postId: { ref: 'Post', type: Number },
-  userId: { ref: 'User', type: Number }
-}, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
-
-var userSequence = require('mongoose-sequence');
-var postSequence = require('mongoose-sequence');
-var schoolSequence = require('mongoose-sequence');
-var bookingSequence = require('mongoose-sequence');
-var commentSequence = require('mongoose-sequence');
-
-UserSchema.plugin(userSequence, { 'inc_field': 'userId' });
-PostSchema.plugin(postSequence, { 'inc_field': 'postId' });
-SchoolSchema.plugin(schoolSequence, { 'inc_field': 'schoolId' });
-BookingSchema.plugin(bookingSequence, { 'inc_field': 'bookingId' });
-CommentSchema.plugin(commentSequence, { 'inc_field': 'commentId' });
-
-var UserModel = mongoose.model('User', UserSchema);
-var PostModel = mongoose.model('Post', PostSchema);
-var SchoolModel = mongoose.model('School', SchoolSchema);
-var BookingModel = mongoose.model('Booking', BookingSchema);
-var CommentModel = mongoose.model('Comment', CommentSchema);
-
-////////////////////////////////////////////////////////////////
-/// crud 
-
-function crudify_models(resolve, reject) {
-  var db = mongoose.connect(config.mongoose.url /* --mlab (cloud), --localhost(data/db) */);
-  db.then(function () {
-    var address = JSON.stringify(config.mongoose.url);
-    address = address.slice(1, address.length - 1);
-    console.log(chalk.green('OK'), 'mongoose server', chalk.blue(address));
-    
-    var models = {
-      User : UserModel,
-      Post : PostModel,
-      School : SchoolModel,
-      Booking : BookingModel,
-      Comment : CommentModel
-    };
-    
-    resolve(models);
-  });
-}
-
-////////////////////////////////////////////////////////////////
-/// restful
-
-function restify_cruds(resolve, reject) {
-  var crud = new Promise(crudify_models);
+function restify_models(resolve, reject) {
   crud.then(function(models) {
     var express = require('express');
     var router = express.Router();
@@ -131,7 +19,6 @@ function restify_cruds(resolve, reject) {
 
     resolve(router);
   });
-  return crud;
 }
 
 function addRestfulApiPerCrudModel(collection, collectionIndex, model) {
@@ -258,15 +145,4 @@ function delete_one_item(resource_one_item, collectionIndex, model) {
   }
 }
 
-////////////////////////////////////////////////////////////////
-/// exports
 
-module.exports = {
-  User: UserModel,
-  Post: PostModel,
-  School: SchoolModel,
-  Comment: CommentModel,
-  Booking: BookingModel,
-  crud : crudify_models /* Promise */,
-  restful : restify_cruds /* Promise */
-};
