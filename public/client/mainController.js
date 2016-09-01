@@ -28,7 +28,7 @@ angular.module('async.mainController', ['ui.bootstrap'])
 .directive('providerAds', function() {
   return {
     scope: {
-      item: '=providerAds'
+      item: '='
     },
     restrict: 'EA',
     templateUrl: 'client/adsList/adsList.html'
