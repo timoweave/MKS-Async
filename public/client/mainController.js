@@ -17,16 +17,21 @@ angular.module('async.mainController', ['ui.bootstrap'])
     $scope.ads = {};
     $scope.adModalData = Ads.adModalData;
 
-    $scope.$watch('Ads.adModalData', function(){
+    $scope.$watch('Ads.adModalData', function() {
       $scope.adModalData = Ads.adModalData;
     });
 
     $scope.getInfo = function(item) {
       Ads.adModalData = item;
-        $uibModal.open({
-          templateUrl: 'client/adsList/adModal.html',
-          controller: 'AdsController'
-        });
+      $uibModal.open({
+        templateUrl: 'client/adsList/adModal.html',
+        controller: 'AdsController'
+      });
+    };
+
+    $scope.cancel = function() {
+      console.log($scope.$parent);
+      $scope.$dismiss();
     };
 
     $scope.getAds = function() {

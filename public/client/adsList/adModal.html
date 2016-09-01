@@ -1,32 +1,26 @@
 <div>
     <div class='modal-header'>
-        {{adModalData.name}}
+        <h2>{{adModalData.title}}</h2>
     </div>
-    <div class='modal-body form-group'>
-      <form>
+    <div class='modal-body'>
+        <h4>Your name:</h4>
+        <p>{{adModalData.name}}</p>
 
-        <label>Your name:</label>
-        <input class='form-control' ng-model='name' type='text'></input>
+        <h4>School or University:</h4>
+        <p>{{adModalData.school}}</p>
 
-        <label>School or University:</label>
-        <input class='form-control' ng-model='school' type='text'></input>
+        <h4>Major:</h4>
+        <p>{{adModalData.major}}</p>
 
-        <label>Major:</label>
-        <input class='form-control' ng-model='major' type='text'></input>
+        <h4>Price (hourly):</h4>
+        <p>${{adModalData.price}}</p>
 
-        <label>Price (hourly):</label>
-        <div class="input-group">
-          <span class="input-group-addon">$</span>
-          <input class="form-control" type="number" ng-model='price'>
-        </div>
-
-        <label>Description:</label>
-        <textarea class='form-control' ng-model='description'></textarea>
-      </form>
+        <h4>Description:</h4>
+        <p>{{adModalData.description}}</p>
     </div>
 
     <div class='modal-footer'>
-        <button type='submit' ng-click='submit(title);' class="btn btn-success">Create</button>
+        <button type='submit' class="btn btn-success">Book</button>
         <button class="btn btn-outline-default" ng-click='cancel()'>Cancel</button>
     </div>
 </div>
