@@ -17,7 +17,7 @@
     "mongo_cleanup": "rm -rf data/db",
     "json_server": "json-server server/models.json",
     "test_karma": "karma start --browsers PhantomJS",
-    "test_mocha": "mocha --reporter spec spec/",
+    "test_mocha": "mocha --watch --reporter spec spec/",
     "lint": "eslint --fix public server"
   },
   "author": "Sergey Potashnikov, Cindy Sun, Dana Li, Tim Shiu",

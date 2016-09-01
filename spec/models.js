@@ -11,14 +11,22 @@ var Post = models.Post;
 var Comment = models.Comment;
 var Booking = models.Booking;
 
-// var server = require('../server/server');
-// var supertest = require('supertest');
-// var request = supertest.agent(server);
+var server = require('../server/server');
+var supertest = require('supertest');
+var request = supertest.agent(server);
 
 describe("database model", function() {
-
+  /*
+  var cruds = undefined;
+  var models = undefined;
+  */
   beforeEach(function() {
-    
+    /*
+    cruds = new Promise(models.restify_cruds);
+    cruds.then(function (m) {
+      models = m;
+    });
+     */
   });
 
   afterEach(function() {
