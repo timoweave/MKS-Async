@@ -34,6 +34,8 @@ var PostSchema = Schema({
   name : { type: String },
   school : { type: String, required : false },
   // school: { ref: 'School', type: ObjectId, required : false },
+  latitude : { type: Number, required: true },
+  longitude : { type: Number, required: true },
   postedByUserId: { ref: 'User', type: ObjectId, required : false }
 }, {
   timestamps: {
@@ -96,7 +98,7 @@ var BookingModel = mongoose.model('Booking', BookingSchema);
 var CommentModel = mongoose.model('Comment', CommentSchema);
 
 ////////////////////////////////////////////////////////////////
-/// crud 
+/// crud
 
 function crudify_models(resolve, reject) {
   var db = mongoose.connect(config.mongoose.url /* --mlab (cloud), --localhost(data/db) */);
@@ -104,7 +106,7 @@ function crudify_models(resolve, reject) {
     var address = JSON.stringify(config.mongoose.url);
     address = address.slice(1, address.length - 1);
     console.log(chalk.green('OK'), 'mongoose server', chalk.blue(address));
-    
+
     var models = {
       User : UserModel,
       Post : PostModel,
@@ -112,7 +114,7 @@ function crudify_models(resolve, reject) {
       Booking : BookingModel,
       Comment : CommentModel
     };
-    
+
     resolve(models);
   });
 }
@@ -125,9 +127,9 @@ function restify_cruds(resolve, reject) {
   crud.then(function(models) {
     var express = require('express');
     var router = express.Router();
-    
+
     router.addRestfulApiPerCrudModel = addRestfulApiPerCrudModel;
-    
+
     router.addRestfulApiPerCrudModel('/users', 'userId', models.User);
     router.addRestfulApiPerCrudModel('/posts', 'postId', models.Post);
     router.addRestfulApiPerCrudModel('/schools', 'schoolId', models.School);
@@ -163,7 +165,7 @@ function addRestfulApiPerCrudModel(collection, collectionIndex, model) {
 
 function post_new_item(collection, model) {
   return insert_new_item;
-  
+
   function insert_new_item(req, res) {
     console.log(chalk.magenta('post'), collection, req.body);
     var user = new model(req.body);
@@ -230,7 +232,7 @@ function update_one_item(resource_one_item, collectionIndex, model) {
       } else {
         data.save(function(err_save) {
           if (err_save) {
-            res.status(404).end('update fail: save fail');            
+            res.status(404).end('update fail: save fail');
           } else {
             res.status(200).json(data); // 302?
           }
@@ -253,7 +255,7 @@ function delete_one_item(resource_one_item, collectionIndex, model) {
       } else {
         data.remove(function(err_save) {
           if (err_save) {
-            res.status(404).end('delete fail: remove fail');            
+            res.status(404).end('delete fail: remove fail');
           } else {
             res.status(200).json(data); // 302?
           }
