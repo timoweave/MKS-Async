@@ -29,7 +29,7 @@ var config = {
   },
   mongoose: {
     url: undefined,
-    jsonfile: path.join(__dirname, 'models.json'),
+    jsonfile: path.join(__dirname, 'models.sample.json'),
     localhost: 'mongodb://localhost:27017/async',
     mlab: 'mongodb://mks.async:Makersquare_1234@ds045031.mlab.com:45031/heroku_d4w7lpz9',
     localhost_test: 'mongodb://localhost:27017/async_test',

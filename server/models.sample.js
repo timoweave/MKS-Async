@@ -1,13 +1,13 @@
+var path = require('path');
 var request = require('request');
 var jsonfile = require('jsonfile');
-
 var config = require('./config');
 var models = require('./models');
 
 var url = config.mongoose.url;
 console.log(url);
 
-saveSampleData('models.json');
+saveSampleData(path.join(__dirname, 'models.sample.json'));
 
 function addSampleData(url, filename, addMethod) {
   jsonfile.readFile(filename, function(err, obj) {
@@ -32,16 +32,17 @@ function saveSampleData(filename) {
     connected_models.Comment.remove({}, function() { console.log("clear Comment"); });
 
     addSampleData(url, filename, function(url, doc, modelName) {
+
       delete doc.id;
-      var modelName = modelName[0].toUpperCase() + modelName.slice(1, modelName.length-1);
-      var modelClass = connected_models[modelName];
+      var modelLabel = modelName[0].toUpperCase() + modelName.slice(1, modelName.length-1);
+      var modelClass = connected_models[modelLabel];
 
       var model = new modelClass(doc);
       model.save(function(err) {
         if (err) {
-          console.log("err", modelName, err);
+          console.log("err", modelLabel, err);
         } else {
-          console.log("ok", modelName, model);
+          console.log("ok", modelLabel, model);
         }
       });
     });
