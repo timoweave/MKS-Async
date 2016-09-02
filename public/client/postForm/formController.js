@@ -1,6 +1,17 @@
 angular.module('async.formController', [])
 
-.controller('FormController', ['$scope', '$http', 'Modal', '$window', function($scope, $http, Modal, $window) {
+.controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi', function($scope, $http, Modal, $window, uiGmapGoogleMapApi) {
+
+  var areaLat      = 37.7749,
+    areaLng      = -122.4194,
+    areaZoom     = 12;
+
+  uiGmapGoogleMapApi.then(function(maps) {
+    $scope.map  = { center: { latitude: areaLat, longitude: areaLng }, zoom: areaZoom };
+    $scope.options = { scrollwheel: false };
+  });
+
+
 
   $scope.submit = function() {
 
