@@ -1,22 +1,16 @@
-angular.module('async', ['async.mainController', 'async.formController', 'ngRoute', 'ui.bootstrap'])
+angular.module('async', ['async.mainController', 'async.formController', 'ngRoute', 'ui.bootstrap','uiGmapgoogle-maps'])
 
-.config(['$routeProvider', function($routeProvider) {
-  // $routeProvider
-
-  // .when('/providerList', {
-  //  templateUrl: '/providerList.html',
-  //  controller: 'mainController'
-  // })
-
-  // .otherwise({
-  //  redirectTo: '/providerList'
-  // })
-
+.config(['$routeProvider','uiGmapGoogleMapApiProvider', function($routeProvider, uiGmapGoogleMapApiProvider) {
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyAce5w_fapMtVvsiBl-uxQRNZ6bpVXOD1c',
+    v: '3.17',
+    libraries: 'weather,geometry,visualization'
+   });
 }])
 
-.factory('Modal', ['$http', function($http) {
+.factory('Modal', ['$http', function($http){
 
-  var createAd = function(input) {
+  var createAd = function(input){
     return $http({
       method: 'POST',
       url: '/api/posts',
@@ -24,7 +18,7 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
     });
   };
 
-  return {
+  return{
     createAd: createAd
   };
 
@@ -34,9 +28,9 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
 
   var getAds = function() {
     return $http({
-      method: 'GET',
-      url: 'api/posts',
-    })
+        method: 'GET',
+        url: 'api/posts',
+      })
       .then(function(resp) {
         return resp.data;
       });
@@ -49,4 +43,3 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
     adModalData: adModalData
   };
 }]);
-
