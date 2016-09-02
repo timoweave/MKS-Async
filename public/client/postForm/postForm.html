@@ -4,7 +4,6 @@
     </div>
     <div class='modal-body form-group'>
       <form>
-
         <label>Title:</label>
         <input class='form-control' ng-model='title' type='text'></input>
 
@@ -25,8 +24,16 @@
 
         <label>Description:</label>
         <textarea class='form-control' ng-model='description'></textarea>
+
+        <label>Meet Location:</label>
+        <input class='form-control' ng-model='location' type='text'></input>
+        <div>
+            <ui-gmap-google-map center="map.center" options="options" zoom="map.zoom"></ui-gmap-google-map>
+        </div>
       </form>
     </div>
+
+    
 
     <div class='modal-footer'>
         <button type='submit' ng-click='submit(title);' class="btn btn-success">Create</button>
