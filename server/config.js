@@ -45,6 +45,19 @@ var config = {
       }
       return ["http://"  , server_host, ':', config.server.port, '/api'].join('');
     },
+    testConnection : function(user) {
+      user = user || process.env.USER;
+      var id = user.toLowerCase()[0];
+      var mlab_user = 'mongodb://asyncuser:asyncpass';
+      var mlab_test = {'t' /* tim */     : mlab_user + '@ds019886.mlab.com:19886/async_test_tim',
+                       's' /* sergey */  : mlab_user + '@ds019936.mlab.com:19936/async_test_sergey',
+                       'c' /* cindy */   : mlab_user + '@ds019856.mlab.com:19856/async_test_cindy',
+                       'd' /* danna */   : mlab_user + '@ds019796.mlab.com:19796/async_test_dana',
+                       '*' /* default */ : mlab_user + '@ds019946.mlab.com:19946/async_test'
+                      };
+      config.mongoose.url = mlab_test[id] || mlab_test['*'];
+      return config.mongoose.url;
+    },
     config: function configUrl(args) {
       args.forEach(function(arg) {
         if (arg.match('^--localhost')) {
@@ -65,15 +78,7 @@ var config = {
         }
         if (arg.match('^--testing')) {
           var user = arg.split('=')[1] || process.env.USER;
-          var id = user[0].toLowerCase();
-          var mlab_user = 'mongodb://asyncuser:asyncpass';
-          var mlab_test = {'t' /* tim */     : mlab_user + '@ds019886.mlab.com:19886/async_test_tim',
-                           's' /* sergey */  : mlab_user + '@ds019936.mlab.com:19936/async_test_sergey',
-                           'c' /* cindy */   : mlab_user + '@ds019856.mlab.com:19856/async_test_cindy',
-                           'd' /* danna */   : mlab_user + '@ds019796.mlab.com:19796/async_test_dana',
-                           '*' /* default */ : mlab_user + '@ds019946.mlab.com:19946/async_test'
-                          };
-          config.mongoose.url = mlab_test[id] || mlab_test['*'];
+          config.mongoose.testConnection(user);
           return;
         }
       });

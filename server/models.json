@@ -72,42 +72,111 @@
     ],
     "posts": [
         { "id": 0, "title": "chemistry tour", "major" : "chemistry", "price" : 20.0,
+          "school" : "Stanford University", "name" : "Eloy Hellen",
           "description" : "chemistry, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
         },
         { "id": 1, "title": "modern art school", "major" : "liberal arts", "price" : 40.0,
+          "school" : "University of California, Berkeley", "name" : "Elizabeth West",
           "description" : "modern art, Non pulvinar neque laoreet suspendisse interdum consectetur libero"
         },
         { "id": 2, "title": "computer science", "major" : "computer science", "price" : 20.0,
+          "school" : "Georgia Washington University", "name" : "James King",
           "description" : "computer science, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
         },
         { "id": 3, "title": "mathematic", "major" : "mathematic", "price" : 20.0,
+          "school" : "California Polytechnic State University", "name" : "Kris Morita",
           "description" : "mathematic, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
         },
         { "id": 4, "title": "architecture", "major" : "architecture", "price" : 20.0,
+          "school" : "Carnegie Mellon University", "name" : "Francina Carboni",
           "description" : "architecture, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
         },
         { "id": 5, "title": "mechanical engineering", "major" : "mechanical", "price" : 20.0,
+          "school" : "Cornell University", "name" : "Mazie Brumer",
           "description" : "mechanical, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
         },
         { "id": 6, "title": "economic department", "major" : "economic", "price" : 20.0,
+          "school" : "Columbia University", "name" : "Kristopher Geiger",
           "description" : "economic, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
         },
         { "id": 7, "title": "altheltic deparment", "major" : "altheltic", "price" : 20.0,
+          "school" : "Duke University", "name" : "Tillie Reiter",          
           "description" : "altheltic, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
         },
-        { "id": 8, "title": "english", "major" : "altheltic", "price" : 20.0,
+        { "id": 8, "title": "english", "major" : "altheltic", "price" : 20.0, 
+          "school" : "University of Michigan", "name" : "Marcy Faucher",
           "description" : "engilish, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
         },
-        { "id": 9, "title": "medicine", "major" : "medical school", "price" : 20.0,
+        { "id": 9, "title": "medicine", "major" : "medical school", "price" : 20.0, 
+          "school" : "Georgia Institute of Technology", "name" : "Robena Radabaugh",
+          "description" : "medicine, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+
+
+        { "id": 10, "title": "chemistry tour", "major" : "chemistry", "price" : 20.0,
+          "school" : "Stanford University", "name" : "Eloy Hellen",
+          "description" : "chemistry, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 11, "title": "modern art school", "major" : "liberal arts", "price" : 40.0,
+          "school" : "University of California, Berkeley", "name" : "Elizabeth West",
+          "description" : "modern art, Non pulvinar neque laoreet suspendisse interdum consectetur libero"
+        },
+        { "id": 12, "title": "computer science", "major" : "computer science", "price" : 20.0,
+          "school" : "Georgia Washington University", "name" : "James King",
+          "description" : "computer science, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 13, "title": "mathematic", "major" : "mathematic", "price" : 20.0,
+          "school" : "California Polytechnic State University", "name" : "Kris Morita",
+          "description" : "mathematic, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 14, "title": "architecture", "major" : "architecture", "price" : 20.0,
+          "school" : "Carnegie Mellon University", "name" : "Francina Carboni",
+          "description" : "architecture, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 15, "title": "mechanical engineering", "major" : "mechanical", "price" : 20.0,
+          "school" : "Cornell University", "name" : "Mazie Brumer",
+          "description" : "mechanical, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 16, "title": "economic department", "major" : "economic", "price" : 20.0,
+          "school" : "Columbia University", "name" : "Kristopher Geiger",
+          "description" : "economic, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 17, "title": "altheltic deparment", "major" : "altheltic", "price" : 20.0,
+          "school" : "Duke University", "name" : "Tillie Reiter",          
+          "description" : "altheltic, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 18, "title": "english", "major" : "altheltic", "price" : 20.0, 
+          "school" : "University of Michigan", "name" : "Marcy Faucher",
+          "description" : "engilish, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
+        },
+        { "id": 19, "title": "medicine", "major" : "medical school", "price" : 20.0, 
+          "school" : "Georgia Institute of Technology", "name" : "Robena Radabaugh",
           "description" : "medicine, Pulvinar etiam non quam lacus suspendisse faucibus interdum"
         }
+        
     ],
     "bookings" : [
-        { "id" : 0, "time" : "Wed Aug 31 18:36:27 PDT 2016", "place" : "berkeley library" },
-        { "id" : 1, "time" : "Wed Aug 31 18:36:27 PDT 2016", "place" : "stanford student center" }
+        { "id" : 0, "time" : "Wed Aug 31 18:36:27 PDT 2016", "place" : "stanford student center" },
+        { "id" : 1, "time" : "Wed Jul 28 18:36:27 PDT 2016", "place" : "berkeley library" },
+        { "id" : 2, "time" : "Wed Jun 26 18:36:27 PDT 2016", "place" : "Georgia Washington University library" },
+        { "id" : 3, "time" : "Wed May 24 18:36:27 PDT 2016", "place" : "California Polytechnic State University library" },
+        { "id" : 4, "time" : "Wed Apr 22 18:36:27 PDT 2016", "place" : "Carnegie Mellon University library" },
+        { "id" : 5, "time" : "Wed Mar 20 18:36:27 PDT 2016", "place" : "Cornell University student center" },
+        { "id" : 6, "time" : "Wed Aug 18 18:36:27 PDT 2016", "place" : "Columbia University student center" },
+        { "id" : 7, "time" : "Wed Jul 16 18:36:27 PDT 2016", "place" : "Duke University student center" },
+        { "id" : 8, "time" : "Wed Jun 14 18:36:27 PDT 2016", "place" : "University of Michigan student center" },
+        { "id" : 9, "time" : "Wed Aug 12 18:36:27 PDT 2016", "place" : "Georgia Institute of Technology student center" }
     ],
     "comments": [
         { "id": 0, "comment": "boring guide" },
-        { "id": 1, "comment": "awesome tour" }
+        { "id": 1, "comment": "awesome tour" },
+        { "id": 2, "comment": "typical tour" },
+        { "id": 3, "comment": "a must-go tour" },
+        { "id": 4, "comment": "I can do it better" },
+        { "id": 5, "comment": "nice guy tour" },
+        { "id": 6, "comment": "good stories tour" },
+        { "id": 7, "comment": "horrible nightmare tour" },
+        { "id": 8, "comment": "wanna do it again tour" },
+        { "id": 9, "comment": "he is the best" }
     ]
 }

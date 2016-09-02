@@ -10,10 +10,10 @@ var app = express();
 app = create_app(app);
 module.exports = app;
 
-var server = new Promise(add_restful_models(app));
+var dataServer = new Promise(add_restful_models(app));
 
 if (!module.parent) {
-  server.then(function(srv) {
+  dataServer.then(function(srv) {
     start_app(srv);
   });
 }
@@ -23,7 +23,7 @@ function add_restful_models(app) {
 
   function insert_restful_models(resolve, reject) {
     
-    var restful = new Promise(models.restful);
+    var restful = new Promise(models.restify_cruds);
     restful.then(function(api) {
       app.use('/api', api);
         resolve(app);
