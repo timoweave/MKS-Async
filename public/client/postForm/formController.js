@@ -45,6 +45,7 @@ angular.module('async.formController', [])
         price: this.price,
         latitude: $scope.map.center.latitude,
         longitude: $scope.map.center.longitude,
+        address: $scope.place.formatted_address,
         description: this.description
       };
 

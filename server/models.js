@@ -36,6 +36,7 @@ var PostSchema = Schema({
   // school: { ref: 'School', type: ObjectId, required : false },
   latitude : { type: Number, required: true },
   longitude : { type: Number, required: true },
+  address: { type: String, required: true },
   postedByUserId: { ref: 'User', type: ObjectId, required : false }
 }, {
   timestamps: {
