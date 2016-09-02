@@ -3,14 +3,32 @@ angular.module('async.mainController', ['ui.bootstrap'])
 .controller('MainController', ['$scope', '$uibModal', '$filter', 'Ads', 'uiGmapGoogleMapApi',
   function($scope, $uibModal, $filter, Ads, uiGmapGoogleMapApi) {
 
-    var areaLat      = 37.7749,
-    areaLng      = -122.4194,
-    areaZoom     = 12;
+    $scope.render = true;
+    $scope.getMap = function(lat, lng) {
+      uiGmapGoogleMapApi.then(function(maps) {
+        $scope.map = {
+          center: {
+            latitude: lat,
+            longitude: lng
+          },
+          zoom: 13,
+          markers: [{
+            id: Date.now(),
+            coords: {
+              latitude: lat,
+              longitude: lng
+            }
+          }]
+        };
+        $scope.options = {
+          scrollwheel: true
+        };
+      });
+    };
 
-  uiGmapGoogleMapApi.then(function(maps) {
-    $scope.map  = { center: { latitude: areaLat, longitude: areaLng }, zoom: areaZoom };
-    $scope.options = { scrollwheel: false };
-  });
+    $scope.$watch('adModalData.latitude', function() {
+        $scope.getMap($scope.adModalData.latitude, $scope.adModalData.longitude);
+    });
 
     $scope.openForm = function() {
       $uibModal.open({
@@ -53,12 +71,12 @@ angular.module('async.mainController', ['ui.bootstrap'])
     });
 
     $scope.searchModel = {};
-    $scope.search = function () {
+    $scope.search = function() {
       $scope.filteredSearch = $filter('filter')($scope.ads, {
-      'school': $scope.searchModel.school,
-      'major': $scope.searchModel.major
-    });
-   };
+        'school': $scope.searchModel.school,
+        'major': $scope.searchModel.major
+      });
+    };
   }
 ])
 

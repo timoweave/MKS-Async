@@ -1,4 +1,4 @@
-<div ng-controller='FormController'>
+<div ng-controller='FormController' ng-init='getMap(37.7749, -122.4194)'>
     <div class='modal-header'>
         Create Your Tour
     </div>
@@ -21,12 +21,10 @@
             <textarea class='form-control' ng-model='description'></textarea>
             <label>Meet Location:</label>
             <input class='form-control' g-places-autocomplete ng-model='place' type='text'></input>
-            <div>
-                <h5>Result:</h5>
-            <pre>{{place | json}}</pre>
-        </div>
         <div>
-            <ui-gmap-google-map center="map.center" options="options" zoom="map.zoom"></ui-gmap-google-map>
+            <ui-gmap-google-map ng-if="render" center="map.center" options="options" zoom="map.zoom">
+            <ui-gmap-marker coords="map.markers[0].coords" icon="map.markers[0].icon" idkey="map.markers[0].id"></ui-gmap-marker>
+            </ui-gmap-google-map>
         </div>
     </form>
 </div>
