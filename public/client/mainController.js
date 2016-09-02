@@ -1,7 +1,7 @@
 angular.module('async.mainController', ['ui.bootstrap'])
 
-.controller('MainController', ['$scope', '$uibModal',
-  function($scope, $uibModal) {
+.controller('MainController', ['$scope', '$uibModal', '$filter', 'Ads',
+  function($scope, $uibModal, $filter, Ads) {
 
     $scope.openForm = function() {
       $uibModal.open({
@@ -9,13 +9,8 @@ angular.module('async.mainController', ['ui.bootstrap'])
         controller: 'FormController'
       });
     };
-  }
-])
 
-.controller('AdsController', ['$scope', '$uibModal', 'Ads',
-  function($scope, $uibModal, Ads) {
     $scope.ads = {};
-    $scope.adModalData = Ads.adModalData;
 
     $scope.$watch('Ads.adModalData', function() {
       $scope.adModalData = Ads.adModalData;
@@ -25,7 +20,7 @@ angular.module('async.mainController', ['ui.bootstrap'])
       Ads.adModalData = item;
       $uibModal.open({
         templateUrl: 'client/adsList/adModal.html',
-        controller: 'AdsController'
+        controller: 'MainController'
       });
     };
 
@@ -43,6 +38,18 @@ angular.module('async.mainController', ['ui.bootstrap'])
           console.error(err);
         });
     };
+
+    $scope.$watch('ads', function() {
+      $scope.filteredSearch = $scope.ads;
+    });
+
+    $scope.searchModel = {};
+    $scope.search = function () {
+      $scope.filteredSearch = $filter('filter')($scope.ads, {
+      'school': $scope.searchModel.school,
+      'major': $scope.searchModel.major
+    });
+   };
   }
 ])
 
@@ -51,7 +58,7 @@ angular.module('async.mainController', ['ui.bootstrap'])
     scope: {
       item: '='
     },
-    controller: 'AdsController',
+    controller: 'MainController',
     restrict: 'EA',
     templateUrl: 'client/adsList/adsList.html'
   };
