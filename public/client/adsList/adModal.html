@@ -5,22 +5,36 @@
     <div class='modal-body'>
         <h4>Your name:</h4>
         <p>{{adModalData.name}}</p>
-
         <h4>School or University:</h4>
         <p>{{adModalData.school}}</p>
-
         <h4>Major:</h4>
         <p>{{adModalData.major}}</p>
-
         <h4>Price (hourly):</h4>
         <p>${{adModalData.price}}</p>
-
         <h4>Description:</h4>
         <p>{{adModalData.description}}</p>
     </div>
-
     <div class='modal-footer'>
-        <button type='submit' class="btn btn-success">Book</button>
+        <button type='submit' class="btn btn-success" ng-click='showbooking = true'>Book</button>
         <button class="btn btn-outline-default" ng-click='cancel()'>Cancel</button>
     </div>
+</div>
+<div ng-show='showbooking'>
+    <div class='modal-body'>
+        <form>
+            <label>Your Name:</label>
+            <input class='form-control' ng-model='username' type='text'></input>
+            <label>Your Email:</label>
+            <input class='form-control' ng-model='useremail' type='text'></input>
+            <label>Your Phone Number:</label>
+            <input class='form-control' ng-model='userphone' type='text'></input>
+            <label>Your Message</label>
+            <textarea class='form-control' ng-model='usermessage'></textarea>
+        </form>
+    </div>
+    <div class='modal-footer'>
+        <button type='submit' class="btn btn-success">Send Message</button>
+        <button class="btn btn-outline-default" ng-click='cancel()'>Cancel</button>
+    </div>
+</div>
 </div>
