@@ -1,7 +1,16 @@
 angular.module('async.mainController', ['ui.bootstrap'])
 
-.controller('MainController', ['$scope', '$uibModal', '$filter', 'Ads',
-  function($scope, $uibModal, $filter, Ads) {
+.controller('MainController', ['$scope', '$uibModal', '$filter', 'Ads', 'uiGmapGoogleMapApi',
+  function($scope, $uibModal, $filter, Ads, uiGmapGoogleMapApi) {
+
+    var areaLat      = 37.7749,
+    areaLng      = -122.4194,
+    areaZoom     = 12;
+
+  uiGmapGoogleMapApi.then(function(maps) {
+    $scope.map  = { center: { latitude: areaLat, longitude: areaLng }, zoom: areaZoom };
+    $scope.options = { scrollwheel: false };
+  });
 
     $scope.openForm = function() {
       $uibModal.open({
