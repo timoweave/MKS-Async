@@ -1,4 +1,4 @@
-<div ng-controller='FormController'>
+<div ng-controller='FormController' ng-init='getMap(37.7749, -122.4194)'>
     <div class='modal-header'>
         Create Your Tour
     </div>
@@ -26,7 +26,8 @@
             <pre>{{place | json}}</pre>
         </div>
         <div>
-            <ui-gmap-google-map center="map.center" options="options" zoom="map.zoom"></ui-gmap-google-map>
+            <ui-gmap-google-map ng-if="render" center="map.center" options="options" zoom="map.zoom">
+            </ui-gmap-google-map>
         </div>
     </form>
 </div>

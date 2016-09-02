@@ -14,7 +14,7 @@
         <h4>Description:</h4>
         <p>{{adModalData.description}}</p>
         <h4>Meet Location:</h4>
-        <ui-gmap-google-map center="map.center" options="options" zoom="map.zoom"></ui-gmap-google-map>
+        <ui-gmap-google-map ng-if="render" center="map.center" options="options" zoom="map.zoom"></ui-gmap-google-map>
     </div>
     <div class='modal-footer'>
         <button type='submit' class="btn btn-success" ng-click='showbooking = true'>Book</button>
