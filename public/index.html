@@ -17,23 +17,23 @@
       <div class='control-group controls searchBar'>
         <div class='row'>
         <div class='col-md-5'>
-          <input class="form-control" type='text' name='school' placeholder='search school...'>
+          <input class="form-control" type='text' name='school' placeholder='Enter School Name Here' ng-model='searchModel.school'>
         </div>
 
         <div class='col-md-5'>
-          <input class="form-control" type='text' name='major' placeholder='major?'>
+          <input class="form-control" type='text' name='major' placeholder='Enter Major Here' ng-model='searchModel.major'>
         </div>
         <div class='col-md-2'>
-          <button class="btn btn-success btn-block" type='button'>Search</button>
+          <button class="btn btn-success btn-block" type="button" ng-click = "search()">Search</button>
         </div>
         </div>
       </div>
     </div>
     <hr>
 
-    <div ng-controller="AdsController" class="row list" ng-init="getAds()">
+    <div class="row list" ng-init="getAds()">
 
-      <provider-ads class="col-xs-6 col-md-4" ng-repeat='post in ads' item = 'post'></provider-ads>
+      <provider-ads class="col-xs-6 col-md-4" ng-repeat="post in filteredSearch" item = "post" ></provider-ads>
 
       </div>
 
