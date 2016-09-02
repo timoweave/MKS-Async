@@ -10,10 +10,17 @@ angular.module('async.formController', [])
             latitude: lat, //Default location is San Francisco
             longitude: lng
           },
-          zoom: 13
+          zoom: 13,
+          markers: [{
+            id: Date.now(),
+            coords: {
+              latitude: lat,
+              longitude: lng
+            }
+          }]
         };
         $scope.options = {
-          scrollwheel: false
+          scrollwheel: true
         };
       });
     };
