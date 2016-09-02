@@ -11,7 +11,7 @@ angular.module('async.formController', [])
     $scope.options = { scrollwheel: false };
   });
 
-
+  $scope.place = null;
 
   $scope.submit = function() {
 

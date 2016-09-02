@@ -1,4 +1,4 @@
-angular.module('async', ['async.mainController', 'async.formController', 'ngRoute', 'ui.bootstrap','uiGmapgoogle-maps'])
+angular.module('async', ['async.mainController', 'async.formController', 'ngRoute', 'ui.bootstrap','uiGmapgoogle-maps', 'google.places'])
 
 .config(['$routeProvider','uiGmapGoogleMapApiProvider', function($routeProvider, uiGmapGoogleMapApiProvider) {
   uiGmapGoogleMapApiProvider.configure({
