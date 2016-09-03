@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/angular-google-places-autocomplete/src/autocomplete.css">
     <link rel='stylesheet' type='text/css' href='/dist/style.css'/>
   </head>
-  <body ng-controller='ProviderController'>
+  <body ng-controller='ProviderController' ng-init='getAds()'>
     <nav>
       <div>
         <h1>future insight</h1>
@@ -14,6 +14,7 @@
       </div>
     </nav>
     <hr>
+    <div ng-repeat="ad in ads">{{ad.name}}<br/></div>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAce5w_fapMtVvsiBl-uxQRNZ6bpVXOD1c&libraries=places"></script>
   <script src="/lodash/dist/lodash.min.js"></script>
