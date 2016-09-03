@@ -29,7 +29,6 @@ angular.module('async.mainController', ['ui.bootstrap'])
     $scope.$watch('adModalData.latitude', function() {
         $scope.getMap($scope.adModalData.latitude, $scope.adModalData.longitude);
     });
-
     $scope.openForm = function() {
       $uibModal.open({
         templateUrl: 'client/postForm/postForm.html',
