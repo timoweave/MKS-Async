@@ -103,22 +103,23 @@ var CommentModel = mongoose.model('Comment', CommentSchema);
 /// crud
 
 function crudify_models(resolve /* (models) */, reject) {
-  var db = mongoose.connect(config.mongoose.url /* --mlab (cloud), --localhost(data/db) */);
-  db.then(function () {
-    var address = JSON.stringify(config.mongoose.url);
-    address = address.slice(1, address.length - 1);
-    console.log(chalk.green('OK'), 'mongoose server', chalk.blue(address));
+  var mongoose_url = JSON.stringify(config.mongoose.url);
+  mongoose_url = mongoose_url.slice(1, mongoose_url.length - 1);
+  var db = mongoose.connect(config.mongoose.url /* --mlab (cloud), --localhost(data/db), --localhost_test*/);
+  db.then(ok, no);
 
-    var models = {
-      User : UserModel,
-      Post : PostModel,
-      School : SchoolModel,
-      Booking : BookingModel,
-      Comment : CommentModel
-    };
+  function ok() {
+    var model_list = {
+      School : SchoolModel, User : UserModel, Post : PostModel,
+      Booking : BookingModel, Comment : CommentModel
+    };;
+    console.log(chalk.green('OK'), 'mongoose server', chalk.blue(mongoose_url));
+    resolve(model_list);
+  }
 
-    resolve(models);
-  });
+  function no() {
+    console.log(chalk.red('NO'), 'mongoose server', chalk.blue(mongoose_url));
+  }
 }
 
 ////////////////////////////////////////////////////////////////

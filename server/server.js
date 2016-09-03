@@ -23,11 +23,10 @@ function add_restful_models(app) {
   return insert_restful_models;
 
   function insert_restful_models(resolve, reject) {
-
     var restful = new Promise(models.restify_cruds);
-    restful.then(function(api) {
-      app.use('/api', api);
-        resolve(app);
+    restful.then(function(restful_api) {
+      app.use('/api', restful_api);
+      resolve(app);
     });
     return restful;
   }
