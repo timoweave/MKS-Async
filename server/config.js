@@ -53,6 +53,7 @@ var config = {
                        's' /* sergey */  : mlab_user + '@ds019936.mlab.com:19936/async_test_sergey',
                        'c' /* cindy */   : mlab_user + '@ds019856.mlab.com:19856/async_test_cindy',
                        'd' /* danna */   : mlab_user + '@ds019796.mlab.com:19796/async_test_dana',
+                       'i' /* danna */   : mlab_user + '@ds019796.mlab.com:19796/async_test_dana',
                        '*' /* default */ : mlab_user + '@ds019946.mlab.com:19946/async_test'
                       };
       config.mongoose.url = mlab_test[id] || mlab_test['*'];
@@ -60,6 +61,10 @@ var config = {
     },
     config: function configUrl(args) {
       args.forEach(function(arg) {
+        if (arg.match('^--localhost_test')) {
+          config.mongoose.url = arg.split('=')[1] || config.mongoose.localhost_test;
+          return;
+        }
         if (arg.match('^--localhost')) {
           config.mongoose.url = arg.split('=')[1] || config.mongoose.localhost;
           return;

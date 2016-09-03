@@ -72,8 +72,8 @@ var CommentSchema = Schema({
 var BookingSchema = Schema({
   time: { type: Date, required: true },
   place: { type: String, required: true },
-  postId: { ref: 'Post', type: Number },
-  userId: { ref: 'User', type: Number }
+  postId: { ref: 'Post', type: Number, required : false },
+  userId: { ref: 'User', type: Number, required : false }
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -102,7 +102,7 @@ var CommentModel = mongoose.model('Comment', CommentSchema);
 ////////////////////////////////////////////////////////////////
 /// crud
 
-function crudify_models(resolve, reject) {
+function crudify_models(resolve /* (models) */, reject) {
   var db = mongoose.connect(config.mongoose.url /* --mlab (cloud), --localhost(data/db) */);
   db.then(function () {
     var address = JSON.stringify(config.mongoose.url);
@@ -124,7 +124,7 @@ function crudify_models(resolve, reject) {
 ////////////////////////////////////////////////////////////////
 /// restful
 
-function restify_cruds(resolve, reject) {
+function restify_cruds(resolve /* (router) */, reject) {
   var crud = new Promise(crudify_models);
   crud.then(function(models) {
     var express = require('express');
