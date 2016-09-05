@@ -83,7 +83,7 @@ angular.module('async.mainController', ['ui.bootstrap'])
   return{
     controller: 'MainController',
     restrict: 'EA',
-    templateUrl: 'client/test/carousel.html'
+    templateUrl: 'client/carousel/carousel.html'
   };
 })
 
