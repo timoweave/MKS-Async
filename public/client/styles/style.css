@@ -1,22 +1,17 @@
 body {
-  margin: 0;
-  margin-top: 10px;
   font-family: Helvetica,arial, sans-serif;
 }
 
-a {
+a, a:hover {
   color: #333;
   font-size: 14px;
   text-decoration: none;
 }
 
-h1 {
-  margin-bottom: 10px;
-}
 
-
-nav {
-  margin: 0 5% 0 5%;
+nav { 
+  background-color: #458BED;
+  padding: 0 0 0 5%;
 }
 
 .list {
@@ -24,10 +19,6 @@ nav {
 }
 
 
-#container {
-  clear: both;
-  margin-top: 10px;
-}
 
 input {
   width: 360px;
@@ -38,10 +29,16 @@ input {
 }
 
 .borderonad {
-  border: solid 1px grey;
-  border-radius: 10px;
+  border: solid 2px #458BED;
+  border-radius: 5px;
   padding: 10px;
-  text-align: center;
+  margin: 5px 5px 5px 5px;
+  max-height: 250px;
+  min-height: 150px;
+
+}
+.modal-header{
+  background-color: #458BED;
 }
 
 .error {
@@ -56,15 +53,29 @@ input {
   margin: 0 10px;
 }
 
-.btn-outline-default {
+.btn-outline-default, .btn-outline-default:hover {
   background-color: transparent;
   color: inherit;
   border-color: grey;
 }
 
+.btn-success, .btn-success:hover, .btn-success:focus{
+  background-color: #39D484;
+  border-color: #39D484;
+}
+
+.container-fluid{
+  padding-left: 0;
+  padding-right:0;
+}
+
+#listB{
+  padding-right: 5px;
+}
 .searchBar{
+  background-color: #458BED;
   text-align: center;
-  padding: 0 10% 0 10%;
+  padding: 2% 5% 2% 5%;
 }
 
 .col-md-5{
@@ -73,6 +84,11 @@ input {
 
 .col-md-2{
   padding: 0;
+  display:inline;
+}
+
+.navB{
+  margin-top: 13px;
 }
 
 .angular-google-map-container {
@@ -82,3 +98,23 @@ input {
 .pac-container {
     z-index: 100000;
 }
+
+.header{
+/*  background-color: #3076D9;*/
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.title{
+  color: white;
+}
+
+.carousel,.item.active{
+  height: 100%;
+  max-height: 450px;
+}
+.carousel-inner{
+  height:100%;
+}
+
+
