@@ -21,7 +21,7 @@ angular.module('async.mainController', ['ui.bootstrap'])
           }]
         };
         $scope.options = {
-          scrollwheel: true
+          scrollwheel: false
         };
       });
     };
@@ -79,6 +79,13 @@ angular.module('async.mainController', ['ui.bootstrap'])
     };
   }
 ])
+.directive('topCarousel', function(){
+  return{
+    controller: 'MainController',
+    restrict: 'EA',
+    templateUrl: 'client/test/carousel.html'
+  };
+})
 
 .directive('providerAds', function() {
   return {

@@ -20,7 +20,7 @@ angular.module('async.formController', [])
           }]
         };
         $scope.options = {
-          scrollwheel: true
+          scrollwheel: false
         };
       });
     };
