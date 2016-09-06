@@ -1,4 +1,4 @@
-angular.module('async', ['async.mainController', 'async.formController', 'ngRoute', 'ui.bootstrap','uiGmapgoogle-maps', 'google.places'])
+angular.module('async', ['async.mainController', 'async.formController', 'async.loginController', 'ngRoute', 'ui.bootstrap','uiGmapgoogle-maps', 'google.places'])
 
 .config(['$routeProvider','uiGmapGoogleMapApiProvider', function($routeProvider, uiGmapGoogleMapApiProvider) {
   uiGmapGoogleMapApiProvider.configure({
@@ -42,4 +42,11 @@ angular.module('async', ['async.mainController', 'async.formController', 'ngRout
     getAds: getAds,
     adModalData: adModalData
   };
-}]);
+}])
+
+.factory("Auth", ["$firebaseAuth",
+  function($firebaseAuth) {
+    var ref = new Firebase("https://docs-sandbox.firebaseio.com");
+    return $firebaseAuth(ref);
+  }
+]);
