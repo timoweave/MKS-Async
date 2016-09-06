@@ -48,6 +48,10 @@ function create_app(app) {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });
 
+  app.get('/providerDash', function(req, res){
+    res.sendFile(path.join(__dirname, '../public/client/providerDash/providerDash.html'));
+  }); //MUST CHANGE WHEN WE HAVE AUTHENTICATION
+
   return app;
 }
 

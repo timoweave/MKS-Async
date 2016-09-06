@@ -9,7 +9,7 @@ a, a:hover {
 }
 
 
-nav { 
+nav {
   background-color: #458BED;
   padding: 0 0 0 5%;
 }
@@ -35,8 +35,8 @@ input {
   margin: 5px 5px 5px 5px;
   max-height: 250px;
   min-height: 150px;
-
 }
+
 .modal-header{
   background-color: #458BED;
 }
