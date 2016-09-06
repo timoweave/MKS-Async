@@ -37,6 +37,13 @@ angular.module('async.mainController', ['ui.bootstrap'])
       });
     };
 
+    $scope.openLogin = function() {
+      $uibModal.open({
+        templateUrl: 'client/login/loginModal.html',
+        controller: 'loginController'
+      });
+    };
+
     $scope.ads = {};
 
     $scope.$watch('Ads.adModalData', function() {

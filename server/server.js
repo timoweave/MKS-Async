@@ -5,6 +5,7 @@ var path = require('path');
 var config = require('./config');
 var models = require('./models');
 var chalk = require('chalk');
+var firebase = require('firebase');
 
 var app = express();
 app = create_app(app);
@@ -22,7 +23,7 @@ function add_restful_models(app) {
   return insert_restful_models;
 
   function insert_restful_models(resolve, reject) {
-    
+
     var restful = new Promise(models.restify_cruds);
     restful.then(function(api) {
       app.use('/api', api);
@@ -39,14 +40,14 @@ function create_app(app) {
   app.use(morgan('combined'));
   app.use(express.static(path.join(__dirname, '../public')));
   app.use(express.static(path.join(__dirname, '../bower_components')));
-  
+
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
-  
+
   app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });
-  
+
   return app;
 }
 
