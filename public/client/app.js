@@ -6,7 +6,6 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
     v: '3.17',
     libraries: 'weather,geometry,visualization'
    });
-
 }])
 
 .factory('Modal', ['$http', 'Upload', function($http, Upload){
@@ -56,8 +55,8 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
 
 .factory("Auth", ["$firebaseAuth",
   function($firebaseAuth) {
-    var ref = new Firebase("https://future-insight.firebaseio.com/users");
-    return $firebaseAuth(ref);
+    var auth = firebase.auth();
+    return $firebaseAuth(auth);
   }
 ])
 

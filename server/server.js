@@ -6,10 +6,6 @@ var config = require('./config');
 var models = require('./models');
 var chalk = require('chalk');
 var firebase = require('firebase');
-var multer = require('multer');
-var fs = require('fs');
-
-// var upload = multer({dest: 'uploads/'});
 
 var app = express();
 app = create_app(app);
@@ -45,12 +41,12 @@ function create_app(app) {
   app.use(express.static(path.join(__dirname, '../bower_components')));
   app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
   app.use(bodyParser.json({limit: '10mb'}));
- 
+
 // var upload = multer({ dest: './uploads/' });
 //  app.post('/upload', upload.single('file'), function(req,res,next){
 //     console.log('Uploade Successful ', req.file, req.body);
 // });
- 
+
   app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });

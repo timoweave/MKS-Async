@@ -1,4 +1,4 @@
-angular.module('async.loginController', ["firebase"])
+angular.module('async.loginController', ['firebase'])
 
 .controller("loginController", ["$scope", "Auth", "SignInState",
   function($scope, Auth, SignInState) {

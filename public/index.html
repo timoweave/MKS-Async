@@ -23,6 +23,7 @@
     <script src="/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="/dist/production.min.js"></script>
 
+<<<<<<< b7dc973a3979d1511e60cb23b52e5596e716ca91
 <!-- upload scripts -->
 <script src="/flow.js/dist/flow.min.js"></script>
 <script src="/ng-flow/dist/ng-flow.min.js"></script>
@@ -32,10 +33,14 @@
     <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-auth.js"></script> -->
     <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 
+=======
+>>>>>>> fix(web-client): change dependencies for angularfire and firebase
     <!-- Firebase -->
-    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="/firebase/firebase.js"></script>
     <!-- AngularFire -->
-    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+    <script src="/angularfire/dist/angularfire.js">
+
+    </script>
 
     <script>
       // Initialize Firebase
@@ -43,12 +48,16 @@
        apiKey: "AIzaSyBf5hgcfKqgRMvx4DvFtSq78S73Uv0kZic",
        authDomain: "future-insight.firebaseapp.com",
        databaseURL: "https://future-insight.firebaseio.com",
-       storageBucket: "",
+       storageBucket: "future-insight.appspot.com"
        };
       firebase.initializeApp(config);
+<<<<<<< b7dc973a3979d1511e60cb23b52e5596e716ca91
     </script>
 <script src="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.js"></script>
 <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.css" />
+=======
+</script>
+>>>>>>> fix(web-client): change dependencies for angularfire and firebase
 
 
   </head>
@@ -106,19 +115,6 @@
     <div id="pagination">
       <ul uib-pagination total-items="filteredSearch.length" ng-model="currentPage" item-per-page="pageSize" ></ul>       
     </div>
-
-<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAce5w_fapMtVvsiBl-uxQRNZ6bpVXOD1c&libraries=places"></script>
-  <script src="/lodash/dist/lodash.min.js"></script>
-  <script src="/angular/angular.js"></script>
-  <script src="/angular-google-places-autocomplete/src/autocomplete.js"></script>
-  <script src="/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
-  <script src="/angular-google-maps/dist/angular-google-maps.min.js"></script>
-  <script src="/angular-route/angular-route.js"></script>
-  <script src="/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-  <script src="/dist/production.min.js"></script> -->
-
   </body>
   <footer>
   </footer>
