@@ -9,7 +9,7 @@ var q = require('q');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
-mongoose.Promise = require('q').Promise;
+mongoose.Promise = require('q').Promise; // mongoose.mpromise // deprecateda
 
 var UserSchema = Schema({
   username: { type: String, required: true },
@@ -37,6 +37,7 @@ var PostSchema = Schema({
   latitude : { type: Number, required: true },
   longitude : { type: Number, required: true },
   address: { type: String, required: true },
+  firebaseId : { type : String, required : false},
   postedByUser: { type: String, required: true },
   // postedByUserId: { ref: 'User', type: ObjectId, required : false }
 }, {
@@ -45,6 +46,28 @@ var PostSchema = Schema({
     updatedAt: 'updated_at'
   }
 });
+
+/* 
+ * http://mongoosejs.com/docs/guide.html#methods
+ */
+
+/*
+Postschema.pre("save", function() {
+  this.setUser();
+
+});
+
+PostSchema.setUser = function(username) {
+  var user = Users.find({username : username}, function(find_err, new_user) {
+               if (find_err) {
+                 user = new User();// ....
+               }
+               
+               this.postedByUser = user;
+               
+             });
+}
+*/
 
 var SchoolSchema = Schema({
   name: { type: String, required: true },
@@ -93,32 +116,45 @@ SchoolSchema.plugin(schoolSequence, { 'inc_field': 'schoolId' });
 BookingSchema.plugin(bookingSequence, { 'inc_field': 'bookingId' });
 CommentSchema.plugin(commentSequence, { 'inc_field': 'commentId' });
 
-var UserModel = mongoose.model('User', UserSchema);
-var PostModel = mongoose.model('Post', PostSchema);
-var SchoolModel = mongoose.model('School', SchoolSchema);
-var BookingModel = mongoose.model('Booking', BookingSchema);
-var CommentModel = mongoose.model('Comment', CommentSchema);
+var mongoose_models = {
+  User : mongoose.model('User', UserSchema),
+  Post : mongoose.model('Post', PostSchema),
+  School : mongoose.model('School', SchoolSchema),
+  Booking : mongoose.model('Booking', BookingSchema),
+  Comment : mongoose.model('Comment', CommentSchema)
+};
 
 ////////////////////////////////////////////////////////////////
 /// crud
 
 function crudify_models(resolve /* (models) */, reject) {
+
+  // if (mongoose.connection.db) { resolve(mongoose_models); return; }
+
   var mongoose_url = JSON.stringify(config.mongoose.url);
   mongoose_url = mongoose_url.slice(1, mongoose_url.length - 1);
-  var db = mongoose.connect(config.mongoose.url /* --mlab (cloud), --localhost(data/db), --localhost_test*/);
-  db.then(ok, no);
 
-  function ok() {
-    var model_list = {
-      School : SchoolModel, User : UserModel, Post : PostModel,
-      Booking : BookingModel, Comment : CommentModel
-    };;
-    console.log(chalk.green('OK'), 'mongoose server', chalk.blue(mongoose_url));
-    resolve(model_list);
+  mongoose.connection.on('connected', connected);
+  mongoose.connection.on('disconnected', disconnected);
+  mongoose.connection.on('error', error);
+  mongoose.connection.once('open', ready);
+  var db = mongoose.connect(config.mongoose.url /* --mlab (cloud), --localhost(data/db), --localhost_test*/);
+
+  function ready() {
+    resolve(mongoose_models);
   }
 
-  function no() {
-    console.log(chalk.red('NO'), 'mongoose server', chalk.blue(mongoose_url));
+  function connected() {
+    console.log(chalk.green('OK'), chalk.yellow('connected'), 'mongoose server', chalk.blue(mongoose_url));
+  }
+
+  function disconnected() {
+    console.log(chalk.green('OK'), chalk.yellow('disconnected'), 'mongoose server', chalk.blue(mongoose_url));
+    reject('fail');
+  }
+
+  function error() {
+    console.log(chalk.red('NO'), chalk.yellow('error'), 'mongoose server', chalk.blue(mongoose_url));
   }
 }
 
@@ -152,16 +188,30 @@ function addRestfulApiPerCrudModel(collection, collectionIndex, model) {
   this
   .param(collectionIndex, set_param_index(collectionIndex));
 
-  this
-  .route(resource_all_items)
-  .get(get_all_items(collection, model))
-  .post(post_new_item(collection, model));
+  // "http://localhost:3000/posts/:postId(\\d+)"  // get "1st" item from collection
+  // "http://localhost:3000/posts" // get all the items from collection
+  // "http://localhost:3000/posts/13434" // 404, not found
+  // "http://localhost:3000/posts/abc" // 404, not found
+  // request({method : GET, url : "http://localhost:3000/posts  "}, funxtion() ...)
+  // request({method : POST, url : "http://localhost:3000/posts", 
+  //          data : JSON.stringify({username : xyz})}, funxtion() {}
 
   this
-  .route(resource_one_item)
+  .route(resource_all_items) // "/posts/"
+  .get(get_all_items(collection, model)) // "get all items"
+  .post(post_new_item(collection, model)); // "add a new item"
+
+ // request({method : GET, url : "http://localhost:3000/posts/1"}, funxtion(result)  {})
+ // request({method : PUT, url : "http://localhost:3000/posts/1"}, funxtion(result)  {})
+ // request({method : DELETE, url : "http://localhost:3000/posts/1"}, funxtion(result)  {})
+  this
+  .route(resource_one_item) // "/posts/#"
   .get(get_one_item(resource_one_item, collectionIndex, model))
+
   .put(update_one_item(resource_one_item, collectionIndex, model))
+
   .delete(delete_one_item(resource_one_item, collectionIndex, model));
+
 
   return this;
 }
@@ -272,11 +322,11 @@ function delete_one_item(resource_one_item, collectionIndex, model) {
 /// exports
 
 module.exports = {
-  User: UserModel,
-  Post: PostModel,
-  School: SchoolModel,
-  Comment: CommentModel,
-  Booking: BookingModel,
+  User: mongoose_models.User,
+  Post: mongoose_models.Post,
+  School: mongoose_models.School,
+  Comment: mongoose_models.Comment,
+  Booking: mongoose_models.Booking,
   crudify_models : crudify_models /* Promise */,
   restify_cruds : restify_cruds /* Promise */
 };

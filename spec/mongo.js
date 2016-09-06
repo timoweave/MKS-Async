@@ -10,7 +10,6 @@ describe("mongo database", function() { // crud api
     var config = require('../server/config');
     var models = require('../server/models');
     config.mongoose.url = config.mongoose.localhost_test;
-
     var crud = new Promise(models.crudify_models);
     crud.then(function(connected_models) {
 
@@ -27,9 +26,13 @@ describe("mongo database", function() { // crud api
   after(function(done) {
     let collections = [User, Post, Comment, Booking, School];
     empty_collections(collections, function() {
-      mongoose.disconnect(function() {
-        done();
-      });
+      if (!mongoose.connection.db) {
+         done();
+      } else {
+        mongoose.disconnect(function() {
+          done();
+        });
+      }
     });
   });
 

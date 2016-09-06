@@ -19,13 +19,18 @@ describe("mongoose model", function() {
     School =  models.School;
     Comment = models.Comment;
     Booking = models.Booking;
-    done();
+
+    if (!mongoose.connection.db) {
+      done();
+    } else {
+      mongoose.disconnect(function() {
+        done();
+      });
+    }
   });
 
   after(function(done){
-    mongoose.disconnect(function() {
-      done();
-    });
+    done();
   });
 
   beforeEach(function(done) {
@@ -195,6 +200,7 @@ describe("mongoose model", function() {
       done();
     });
   });
+
 });
 
 describe("mongoose model, instance/method functions", function() {
@@ -242,6 +248,6 @@ describe("mongoose model, class/static functions", function() {
   xit("TBD", function(done) {
     done();
   });
-
+ 
 });
 

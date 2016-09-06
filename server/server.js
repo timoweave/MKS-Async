@@ -65,6 +65,6 @@ function start_app(app) {
       address = 'localhost';
     }
     address += ':' + server.address().port;
-    console.log(chalk.green('OK'), 'node server', chalk.blue(address));
+    console.log(chalk.green('OK'), chalk.yellow('listen'), 'node server', chalk.blue(address));
   }
 }
