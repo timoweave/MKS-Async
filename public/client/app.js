@@ -1,4 +1,4 @@
-angular.module('async', ['async.mainController', 'async.formController', 'async.loginController', 'ngRoute', 'ui.bootstrap','uiGmapgoogle-maps', 'google.places','flow', 'ngFileUpload'])
+angular.module('async', ['async.mainController', 'async.formController', 'async.loginController', 'async.providerController', 'ngRoute', 'ui.bootstrap','uiGmapgoogle-maps', 'google.places', 'firebase'])
 
 .config(['$routeProvider','uiGmapGoogleMapApiProvider','flowFactoryProvider', function($routeProvider, uiGmapGoogleMapApiProvider,flowFactoryProvider) {
   uiGmapGoogleMapApiProvider.configure({
@@ -7,28 +7,11 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
     libraries: 'weather,geometry,visualization'
    });
 
-  flowFactoryProvider.defaults = {
-    target: 'api/posts',
-    permanentErrors: [404, 500, 501],
-    maxChunkRetries: 1,
-    chunkRetryInterval: 5000,
-    simultaneousUploads: 4,
-    singleFile: true
-  };
 }])
 
 .factory('Modal', ['$http', 'Upload', function($http, Upload){
 
   var createAd = function(input){
-    // return Upload.upload({
-    //   url: 'upload',
-    //   data: input
-    // }).then(function(resp) {
-    //   console.log('i think we did some shit lol', resp);
-    //   return resp;
-    // }, function(err) {
-    //     console.log('error lol', err);
-    // });
     return $http({
       method: 'POST',
       url: '/api/posts',
@@ -43,14 +26,6 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
       return(url.match(/\.(jpeg|jpg|gif|png)$/) !== null);
     }
   };
-  // var uploadFile = function(data, uploadUrl){
-  //   var fd = new FormData();
-  //   fd.append('file', data);
-  //   $http.post(uploadUrl, fd, {
-  //     transformRequest: angular.identity,
-  //     headers: {'Content-Type': undefined}
-  //   });
-  // };
 
   return{
     createAd: createAd,
@@ -81,7 +56,17 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
 
 .factory("Auth", ["$firebaseAuth",
   function($firebaseAuth) {
-    var ref = new Firebase("https://docs-sandbox.firebaseio.com");
+    var ref = new Firebase("https://future-insight.firebaseio.com/users");
     return $firebaseAuth(ref);
   }
-]);
+])
+
+.factory("SignInState", function(){
+  var status = {
+    authData: null
+  };
+
+  return {
+    status: status
+  };
+});

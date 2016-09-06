@@ -1,7 +1,7 @@
 angular.module('async.loginController', ["firebase"])
 
-.controller("loginController", ["$scope", "Auth",
-  function($scope, Auth) {
+.controller("loginController", ["$scope", "Auth", "SignInState",
+  function($scope, Auth, SignInState) {
 
     $scope.createUser = function() {
       $scope.message = null;
@@ -31,6 +31,12 @@ angular.module('async.loginController', ["firebase"])
         $scope.error = error;
       });
     };
+
+    Auth.$onAuth(function(authData){
+      SignInState.authData = authData;
+      console.log("authData: ", authData);
+      console.log("SignInState.authData: ", SignInState.authData);
+    });
 
     $scope.removeUser = function() {
       $scope.message = null;
