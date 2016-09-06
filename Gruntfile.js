@@ -45,7 +45,7 @@ module.exports = function(grunt) {
 //          CHECK ALL .JS FILES FOR SYNTAX ERRORS
     jshint: {
       files: [
-        'Gruntfile.js', 'public/client/**/*.js', 'server/*.js'
+        'Gruntfile.js', 'public/client/**/*.js', 'server/**/*.js'
       ],
       options: {
         force: 'true',
@@ -87,6 +87,10 @@ module.exports = function(grunt) {
       css: {
         files: 'public/client/styles/*.css',
         tasks: ['jshint','cssmin']
+      },
+      server : { 
+        files : ['Gruntfile.js', 'server/**/*.js'],
+        tasks: ['jshint', 'test']
       }
     },
 

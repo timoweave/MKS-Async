@@ -29,7 +29,7 @@ var config = {
   },
   mongoose: {
     url: undefined,
-    jsonfile: path.join(__dirname, 'models.json'),
+    jsonfile: path.join(__dirname, 'models.sample.json'),
     localhost: 'mongodb://localhost:27017/async',
     mlab: 'mongodb://mks.async:Makersquare_1234@ds045031.mlab.com:45031/heroku_d4w7lpz9',
     localhost_test: 'mongodb://localhost:27017/async_test',
@@ -53,6 +53,7 @@ var config = {
                        's' /* sergey */  : mlab_user + '@ds019936.mlab.com:19936/async_test_sergey',
                        'c' /* cindy */   : mlab_user + '@ds019856.mlab.com:19856/async_test_cindy',
                        'd' /* danna */   : mlab_user + '@ds019796.mlab.com:19796/async_test_dana',
+                       'i' /* danna */   : mlab_user + '@ds019796.mlab.com:19796/async_test_dana',
                        '*' /* default */ : mlab_user + '@ds019946.mlab.com:19946/async_test'
                       };
       config.mongoose.url = mlab_test[id] || mlab_test['*'];
@@ -60,6 +61,10 @@ var config = {
     },
     config: function configUrl(args) {
       args.forEach(function(arg) {
+        if (arg.match('^--localhost_test')) {
+          config.mongoose.url = arg.split('=')[1] || config.mongoose.localhost_test;
+          return;
+        }
         if (arg.match('^--localhost')) {
           config.mongoose.url = arg.split('=')[1] || config.mongoose.localhost;
           return;
