@@ -28,17 +28,18 @@ var UserSchema = Schema({
 
 var PostSchema = Schema({
   title: { type: String , required: true },
+  imgUrl: {type: String, required: false},
   major: { type: String , required: true },
   description: { type: String, required: true },
   price: Number,
-  name : { type: String },
+  name : { type: String, required: true },
   school : { type: String, required : false },
   // school: { ref: 'School', type: ObjectId, required : false },
   latitude : { type: Number, required: true },
   longitude : { type: Number, required: true },
   address: { type: String, required: true },
   firebaseId : { type : String, required : false},
-  postedByUser: { type: String, required: true },
+  postedByUser: { type: String, required: false },
   // postedByUserId: { ref: 'User', type: ObjectId, required : false }
 }, {
   timestamps: {
@@ -220,7 +221,7 @@ function post_new_item(collection, model) {
   return insert_new_item;
 
   function insert_new_item(req, res) {
-    console.log(chalk.magenta('post'), collection, req.body);
+    console.log(chalk.magenta('post'), collection, req.body, req.files);
     var user = new model(req.body);
     user.save(function(err) {
       if (err) {
@@ -231,6 +232,7 @@ function post_new_item(collection, model) {
     });
   }
 }
+
 
 function get_all_items(collection, model) {
   return retrieve_all_items;

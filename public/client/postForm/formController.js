@@ -1,7 +1,20 @@
 angular.module('async.formController', [])
 
-.controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi',
-  function($scope, $http, Modal, $window, uiGmapGoogleMapApi) {
+.controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi', 'flowFactory', 'Upload',
+  function($scope, $http, Modal, $window, uiGmapGoogleMapApi, flowFactory, Upload) {
+
+    // $scope.obj = {};
+
+    // $scope.print=function(){
+    //   console.log('testing:', $scope.obj.flow);
+    // }
+
+
+    // $scope.uploadFile = function(){
+    //   var file = $scope.myFile;
+    //   var uploadUrl = '/upload';
+    //   Modal.uploadFile(file, uploadUrl);
+    // }
 
     $scope.getMap = function(lat, lng) {
       uiGmapGoogleMapApi.then(function(maps) {
@@ -36,9 +49,9 @@ angular.module('async.formController', [])
     $scope.place = null;
 
     $scope.submit = function() {
-
       $scope.input = {
         title: this.title,
+        imgUrl: this.imgUrl,
         name: this.name,
         school: this.school,
         major: this.major,
@@ -46,7 +59,8 @@ angular.module('async.formController', [])
         latitude: $scope.map.center.latitude,
         longitude: $scope.map.center.longitude,
         address: $scope.place.formatted_address,
-        description: this.description
+        description: this.description,
+        // file: $scope.file
       };
 
       Modal.createAd($scope.input)
@@ -65,4 +79,19 @@ angular.module('async.formController', [])
     };
 
   }
-]);
+])
+.directive('fileModel', ['$parse', function ($parse) {
+        return {
+           restrict: 'A',
+           link: function(scope, element, attrs) {
+              var model = $parse(attrs.fileModel);
+              var modelSetter = model.assign;
+ 
+              element.bind('change', function(){
+                 scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                 });
+              });
+           }
+        };
+     }]);
