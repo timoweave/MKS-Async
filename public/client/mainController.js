@@ -89,6 +89,24 @@ angular.module('async.mainController', ['ui.bootstrap'])
     };
   }
 ])
+.filter('refineSearchModel', function(){
+  return function(items, search) {
+    var filtered_items = items.filter(filter_search);
+    return filtered_items;
+
+    function filter_search(element, index, array) {
+      var searchKeys = Object.keys(search);
+      var match = searchKeys.reduce(matchKeys, true);
+      return match;
+
+      function matchKeys(result, key, index, container) {
+        if (!result) { return false; }
+        result = element[key].toLowerCase().match(search[key].toLowerCase());
+        return result;
+      }
+    }
+  };
+})
 .filter('startFrom', function(){
   return function(data,start){
     if (!Array.isArray(data)) {

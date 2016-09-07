@@ -37,7 +37,7 @@
   </div>
   <!-- provider ad listing:  -->
     <div class="row list" ng-init="getAds()">
-      <provider-ads class="col-xs-6 col-md-4" ng-repeat="post in filteredSearch | startFrom: (currentPage - 1) * pageSize | limitTo: pageSize" item = "post" ></provider-ads>
+      <provider-ads class="col-xs-6 col-md-4" ng-repeat="post in filteredSearch | refineSearchModel:searchModel | startFrom: (currentPage - 1) * pageSize | limitTo: pageSize" item = "post" ></provider-ads>
     </div>
 
     <div id="pagination">
