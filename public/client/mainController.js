@@ -30,8 +30,6 @@ angular.module('async.mainController', ['ui.bootstrap'])
       if (($scope.adModalData) && ($scope.adModalData.latitude) && ($scope.adModalData.longitude)) {
         $scope.getMap($scope.adModalData.latitude, $scope.adModalData.longitude);
       }
-
-      $scope.getMap($scope.adModalData.latitude, $scope.adModalData.longitude);
     });
     $scope.openForm = function() {
       $uibModal.open({
@@ -93,20 +91,14 @@ angular.module('async.mainController', ['ui.bootstrap'])
 ])
 .filter('startFrom', function(){
   return function(data,start){
+    if (!Array.isArray(data)) {
+      return;
+    }
     var sliced = data.slice(start);
     return sliced;
-<<<<<<< de102524af0b098406b3a8dd7997cb9a6ad322de
   };
 })
-.directive('topCarousel', function(){
-  return{
-    controller: 'MainController',
-    restrict: 'EA',
-    templateUrl: 'client/carousel/carousel.html'
-=======
->>>>>>> style(web-client): update styling for front page and providerdash in ng-view
-  };
-})
+
   .directive('topCarousel', function() {
     return {
       controller: 'MainController',

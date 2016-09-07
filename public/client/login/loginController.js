@@ -1,7 +1,8 @@
 angular.module('async.loginController', ['firebase'])
 
-.controller("loginController", ["$scope", "Auth", "SignInState",
-  function($scope, Auth, SignInState) {
+.controller("loginController", ["$scope", "Auth", "SignInState", "$location",
+  function($scope, Auth, SignInState, $location) {
+
 
     $scope.createUser = function() {
       $scope.message = null;
@@ -28,6 +29,7 @@ angular.module('async.loginController', ['firebase'])
         .then(function(authData) {
           $scope.authData = authData;
           $scope.message = "User logged in with uid: " + authData.uid;
+          $location.path('/providerDash');
         }).catch(function(error) {
           $scope.error = error;
         });
@@ -47,6 +49,7 @@ angular.module('async.loginController', ['firebase'])
           $scope.error = error;
         });
     };
+
 
     Auth.$onAuthStateChanged(function(authData) {
       SignInState.authData = authData;
