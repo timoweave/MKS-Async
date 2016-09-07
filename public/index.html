@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/angular-google-places-autocomplete/src/autocomplete.css">
     <link rel='stylesheet' type='text/css' href='/dist/style.css'/>
 
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAce5w_fapMtVvsiBl-uxQRNZ6bpVXOD1c&libraries=places"></script>
@@ -19,6 +21,10 @@
     <script src="/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="/dist/production.min.js"></script>
 
+<!-- upload scripts -->
+<script src="/flow.js/dist/flow.min.js"></script>
+<script src="/ng-flow/dist/ng-flow.min.js"></script>
+<script type="text/javascript" src="/ng-file-upload/ng-file-upload-all.min.js"></script>
 <!--
     <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-auth.js"></script> -->
@@ -38,9 +44,10 @@
        storageBucket: "",
        };
       firebase.initializeApp(config);
-</script>
+    </script>
 <script src="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.js"></script>
 <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.css" />
+
 
   </head>
   <body ng-controller='MainController'>
@@ -51,8 +58,12 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-8">
-              <a href="/"><h2 class="title">Future Insight</h2></a>
-            </div>
+<!--               <a href="/"><h2 class="title">Future Insight</h2></a>
+ -->
+ 
+              <a href="/"><img src="/client/styles/logotest2.png" width="300px" height="60px"></a>
+ 
+             </div>
             <div class="col-md-2 text-right" id="listB">
              <button class='btn btn-success navB' ng-click='openForm()'>Add a listing</button>
             </div>
@@ -65,7 +76,6 @@
     </nav>
 
     <top-carousel></top-carousel>
-
     <!-- search bar  -->
     <div class='container-fluid'>
       <div class='control-group controls searchBar'>
@@ -89,8 +99,10 @@
   <!-- provider ad listing:  -->
     <div class="row list" ng-init="getAds()">
 
-      <provider-ads class="col-xs-6 col-md-4" ng-repeat="post in filteredSearch" item = "post" ></provider-ads>
-
+      <provider-ads class="col-xs-6 col-md-4" ng-repeat="post in filteredSearch | startFrom: (currentPage - 1) * pageSize | limitTo: pageSize" item = "post" ></provider-ads>
+    </div>
+    <div id="pagination">
+      <ul uib-pagination total-items="filteredSearch.length" ng-model="currentPage" item-per-page="pageSize" ></ul>       
     </div>
 
 <!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
