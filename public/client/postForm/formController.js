@@ -54,6 +54,7 @@ angular.module('async.formController', [])
       if(!Modal.checkUrl(this.imgUrl)){
         this.imgUrl = "http://i.imgur.com/XehxIGv.jpg";
       }
+      
       $scope.input = {
         title: this.title,
         imgUrl: this.imgUrl,
