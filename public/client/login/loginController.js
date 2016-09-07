@@ -7,8 +7,9 @@ angular.module('async.loginController', ['firebase'])
       $scope.message = null;
       $scope.error = null;
 
+      $scope.auth = Auth;
 
-      Auth.$createUserWithEmailAndPassword($scope.email, $scope.password)
+      $scope.auth.$createUserWithEmailAndPassword($scope.email, $scope.password)
         .then(function(userData) {
         $scope.message = "User created with uid: " + userData.uid;
       }).catch(function(error) {
@@ -20,7 +21,9 @@ angular.module('async.loginController', ['firebase'])
       $scope.message = null;
       $scope.error = null;
 
-      Auth.$signInWithEmailAndPassword($scope.email, $scope.password)
+      $scope.auth = Auth;
+
+      $scope.auth.$signInWithEmailAndPassword($scope.email, $scope.password)
         .then(function(authData) {
         $scope.authData = authData;
         $scope.message = "User logged in with uid: " + authData.uid;

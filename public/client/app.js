@@ -10,14 +10,13 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
    });
 
   $routeProvider
-  .when('/providerDash', {
+    .when('/providerDash', {
       templateUrl: 'client/providerDash/providerDash.html',
-      // 'client/providerDash/providerDash.html',
       controller: 'ProviderController'
     })
     .when('/', {
       templateUrl: 'home.html',
-      controller: 'ProviderController'
+      controller: 'MainController'
     })
     .otherwise({
       redirectTo: '/'
