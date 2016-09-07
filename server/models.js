@@ -1,15 +1,29 @@
 
 ////////////////////////////////////////////////////////////////
 /// models, schema
-
+var fs = require('fs');
 var config = require('./config');
 var chalk = require('chalk');
 var mongoose = require('mongoose');
 var q = require('q');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
+var multer =  require('multer');
+var uploadImage = multer({desc : "images/"}).single('image');
 
 mongoose.Promise = require('q').Promise; // mongoose.mpromise // deprecateda
+
+var ImageSchema = Schema({
+  originalName: { type: String, required: false }, // client-original-name
+  saveName: { type: String, required: false }, // server-saved-name
+  firebaseName: { type: String, required : false }, //
+  uploadImage: { type: String, required: false }, // file content
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
+});
 
 var UserSchema = Schema({
   username: { type: String, required: true },
@@ -35,11 +49,12 @@ var PostSchema = Schema({
   name : { type: String, required: true },
   school : { type: String, required : false },
   // school: { ref: 'School', type: ObjectId, required : false },
-  latitude : { type: Number, required: true },
-  longitude : { type: Number, required: true },
+  latitude : { type: Number, required: false },
+  longitude : { type: Number, required: false },
   address: { type: String, required: true },
   firebaseId : { type : String, required : false},
   postedByUser: { type: String, required: false },
+  uploadImage : { type : String, required: false }
   // postedByUserId: { ref: 'User', type: ObjectId, required : false }
 }, {
   timestamps: {
@@ -105,12 +120,14 @@ var BookingSchema = Schema({
   }
 });
 
+var imageSequence = require('mongoose-sequence');
 var userSequence = require('mongoose-sequence');
 var postSequence = require('mongoose-sequence');
 var schoolSequence = require('mongoose-sequence');
 var bookingSequence = require('mongoose-sequence');
 var commentSequence = require('mongoose-sequence');
 
+ImageSchema.plugin(imageSequence, { 'inc_field': 'imageId' });
 UserSchema.plugin(userSequence, { 'inc_field': 'userId' });
 PostSchema.plugin(postSequence, { 'inc_field': 'postId' });
 SchoolSchema.plugin(schoolSequence, { 'inc_field': 'schoolId' });
@@ -118,6 +135,7 @@ BookingSchema.plugin(bookingSequence, { 'inc_field': 'bookingId' });
 CommentSchema.plugin(commentSequence, { 'inc_field': 'commentId' });
 
 var mongoose_models = {
+  Image : mongoose.model('Image', ImageSchema),
   User : mongoose.model('User', UserSchema),
   Post : mongoose.model('Post', PostSchema),
   School : mongoose.model('School', SchoolSchema),
@@ -170,6 +188,7 @@ function restify_cruds(resolve /* (router) */, reject) {
 
     router.addRestfulApiPerCrudModel = addRestfulApiPerCrudModel;
 
+    router.addRestfulApiPerCrudModel('/images', 'imageId', models.Image);
     router.addRestfulApiPerCrudModel('/users', 'userId', models.User);
     router.addRestfulApiPerCrudModel('/posts', 'postId', models.Post);
     router.addRestfulApiPerCrudModel('/schools', 'schoolId', models.School);
@@ -200,7 +219,7 @@ function addRestfulApiPerCrudModel(collection, collectionIndex, model) {
   this
   .route(resource_all_items) // "/posts/"
   .get(get_all_items(collection, model)) // "get all items"
-  .post(post_new_item(collection, model)); // "add a new item"
+  .post(uploadImage, post_new_item(collection, model)); // "add a new item"
 
  // request({method : GET, url : "http://localhost:3000/posts/1"}, funxtion(result)  {})
  // request({method : PUT, url : "http://localhost:3000/posts/1"}, funxtion(result)  {})
@@ -221,13 +240,24 @@ function post_new_item(collection, model) {
   return insert_new_item;
 
   function insert_new_item(req, res) {
-    console.log(chalk.magenta('post'), collection, req.body, req.files);
-    var user = new model(req.body);
-    user.save(function(err) {
+    console.log(chalk.magenta('post'), collection, req.body);
+    var item = new model(req.body);
+    if (req.file) {
+      var buf = req.file.buffer;
+      console.log(chalk.magenta('post image'), req.file);
+      item.uploadImage = req.file.originalname;
+      item.firebaseName = item.id + '.'+ req.file.originalname.split('.').reverse()[0];
+      req.body.uploadImage = req.file.originalname;
+      // req.body.saveName = "f." + req.file.originalname;
+      req.body.originalName = req.file.originalname;
+      var fileContent = buf.toString('utf8');
+      // TBD, redirect or something
+    }
+    item.save(function(err) {
       if (err) {
         res.status(404).end('cannot save');
       } else {
-        res.status(200).json(user);
+        res.status(200).json(item);
       }
     });
   }
@@ -324,6 +354,7 @@ function delete_one_item(resource_one_item, collectionIndex, model) {
 /// exports
 
 module.exports = {
+  Image: mongoose_models.Image,
   User: mongoose_models.User,
   Post: mongoose_models.Post,
   School: mongoose_models.School,
