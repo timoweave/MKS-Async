@@ -50,7 +50,6 @@ angular.module('async.loginController', ['firebase'])
         });
     };
 
-
     Auth.$onAuthStateChanged(function(authData) {
       SignInState.authData = authData;
       console.log("authData: ", authData);

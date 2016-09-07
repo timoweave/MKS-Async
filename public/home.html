@@ -5,11 +5,14 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-8">
-              <a href="/"><img src="/client/styles/logotest2.png" width="300px" height="60px"></a>
+              <a href="/#/"><img src="/client/styles/logotest2.png" width="300px" height="60px"></a>
 
              </div>
-            <div class="col-md-2 text-right" id="listB">
+            <div class="col-md-2 text-right" id="listB" ng-if="isUserLoggedIn()">
              <button class='btn btn-success navB' ng-click='openForm()'>Add a listing</button>
+            </div>
+            <div class="col-md-2 text-right" id="listB" ng-if="!isUserLoggedIn()">
+             <button class='btn btn-success navB' ng-click='openLogin()'>Add a listing</button>
             </div>
             <div class="col-md-2 text-left">
               <button class='btn btn-success navB' ng-click='openLogin()'>Log in</button>

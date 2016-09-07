@@ -1,7 +1,7 @@
 angular.module('async.formController', [])
 
-.controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi', 'flowFactory', 'Upload',
-  function($scope, $http, Modal, $window, uiGmapGoogleMapApi, flowFactory, Upload) {
+.controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi',
+  function($scope, $http, Modal, $window, uiGmapGoogleMapApi) {
 
     // $scope.obj = {};
 
@@ -78,7 +78,6 @@ angular.module('async.formController', [])
     };
 
     $scope.cancel = function() {
-      console.log(JSON.stringify($scope.$parent));
       $scope.$parent.$dismiss();
     };
 
