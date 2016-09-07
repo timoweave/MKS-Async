@@ -20,6 +20,8 @@ angular.module('async.providerController', ['ui.bootstrap'])
       console.log('$scope.status.authData: ', $scope.status.authData);
     };
 
+    $scope.auth = Auth;
+
     $scope.getAds = function(){
       Ads.getAds()
         .then(function(data) {

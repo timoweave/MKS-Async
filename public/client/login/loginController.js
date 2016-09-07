@@ -11,13 +11,14 @@ angular.module('async.loginController', ['firebase'])
 
       $scope.auth.$createUserWithEmailAndPassword($scope.email, $scope.password)
         .then(function(userData) {
-        $scope.message = "User created with uid: " + userData.uid;
-      }).catch(function(error) {
-        $scope.error = error;
-      });
+          $scope.auth.$signInWithEmailAndPassword($scope.email, $scope.password);
+          $scope.message = "User created with uid and logged in: " + userData.uid;
+        }).catch(function(error) {
+          $scope.error = error;
+        });
     };
 
-    $scope.loginUser = function(){
+    $scope.loginUser = function() {
       $scope.message = null;
       $scope.error = null;
 
@@ -25,33 +26,32 @@ angular.module('async.loginController', ['firebase'])
 
       $scope.auth.$signInWithEmailAndPassword($scope.email, $scope.password)
         .then(function(authData) {
-        $scope.authData = authData;
-        $scope.message = "User logged in with uid: " + authData.uid;
-      }).catch(function(error) {
-        $scope.error = error;
-      });
-
-      console.log($scope.email);
+          $scope.authData = authData;
+          $scope.message = "User logged in with uid: " + authData.uid;
+        }).catch(function(error) {
+          $scope.error = error;
+        });
     };
 
-    // Auth.onAuth(function(authData){
-    //   SignInState.authData = authData;
-    //   console.log("authData: ", authData);
-    //   console.log("SignInState.authData: ", SignInState.authData);
-    // });
+    $scope.signInWith = function(provider) {
+      $scope.auth = Auth;
 
-    $scope.removeUser = function() {
       $scope.message = null;
       $scope.error = null;
 
-      Auth.$removeUser({
-        email: $scope.email,
-        password: $scope.password
-      }).then(function() {
-        $scope.message = "User removed";
-      }).catch(function(error) {
-        $scope.error = error;
-      });
+      $scope.auth.$signInWithPopup(provider)
+        .then(function(authData) {
+          $scope.authData = authData;
+          $scope.message = "User logged in with uid: " + authData.uid;
+        }).catch(function(error) {
+          $scope.error = error;
+        });
     };
+
+    Auth.$onAuthStateChanged(function(authData) {
+      SignInState.authData = authData;
+      console.log("authData: ", authData);
+      console.log("SignInState.authData: ", SignInState.authData);
+    });
   }
 ]);

@@ -24,15 +24,15 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
 
 }])
 
-.factory('Modal', ['$http', 'Upload', function($http, Upload){
 
-  var createAd = function(input){
-    return $http({
-      method: 'POST',
-      url: '/api/posts',
-      data: input
-    });
-  };
+.factory('Modal', ['$http', function($http){
+    var createAd = function(input) {
+      return $http({
+        method: 'POST',
+        url: '/api/posts',
+        data: input
+      });
+    };
 
   var checkUrl = function(url){
     if(url === undefined){
@@ -46,28 +46,30 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
     createAd: createAd,
     checkUrl: checkUrl
   };
-
 }])
 
-.factory('Ads', ['$http', function($http) {
 
-  var getAds = function() {
-    return $http({
-        method: 'GET',
-        url: 'api/posts',
-      })
-      .then(function(resp) {
-        return resp.data;
-      });
-  };
+.factory('Ads', ['$http',
+  function($http) {
 
-  var adModalData = null;
+    var getAds = function() {
+      return $http({
+          method: 'GET',
+          url: 'api/posts',
+        })
+        .then(function(resp) {
+          return resp.data;
+        });
+    };
 
-  return {
-    getAds: getAds,
-    adModalData: adModalData
-  };
-}])
+    var adModalData = null;
+
+    return {
+      getAds: getAds,
+      adModalData: adModalData
+    };
+  }
+])
 
 .factory("Auth", ["$firebaseAuth",
   function($firebaseAuth) {
@@ -75,7 +77,7 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
   }
 ])
 
-.factory("SignInState", function(){
+.factory("SignInState", function() {
   var status = {
     authData: null
   };
