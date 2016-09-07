@@ -43,12 +43,8 @@ function create_app(app) {
   app.use(morgan('combined'));
   app.use(express.static(path.join(__dirname, '../public')));
   app.use(express.static(path.join(__dirname, '../bower_components')));
-
-
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
-
-
+  app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+  app.use(bodyParser.json({limit: '10mb'}));
  
 // var upload = multer({ dest: './uploads/' });
 //  app.post('/upload', upload.single('file'), function(req,res,next){
