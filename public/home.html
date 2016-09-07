@@ -1,3 +1,4 @@
+<<<<<<< 11b2bb2d9ee7a420b5fd1ec85dd5bdef38e78e67
  <body ng-controller='MainController'>
   <div class="header">
     <!-- nav bar -->
@@ -19,31 +20,33 @@
             </div>
           </div>
         </div>
-    </nav>
-    <top-carousel></top-carousel>
-    <!-- search bar  -->
-    <div class='container-fluid'>
-      <div class='control-group controls searchBar'>
-        <div class='row'>
-          <div class='col-md-5'>
-            <input class="form-control" type='text' name='school' placeholder='Enter School Name Here' ng-model='searchModel.school'>
+</nav>
+            <top-carousel></top-carousel>
+            <!-- search bar  -->
+            <div class='container-fluid'>
+              <div class='control-group controls searchBar'>
+                <div class='row'>
+                  <div class='col-md-5'>
+                    <input class="form-control" type='text' name='school' placeholder='Enter School Name Here' ng-model='searchModel.school'>
+                  </div>
+                  <div class='col-md-5'>
+                    <input class="form-control" type='text' name='major' placeholder='Enter Major Here' ng-model='searchModel.major'>
+                  </div>
+                  <div class='col-md-2'>
+                    <button class="btn btn-success btn-block" type="button" ng-click = "search()">Search</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class='col-md-5'>
-            <input class="form-control" type='text' name='major' placeholder='Enter Major Here' ng-model='searchModel.major'>
-          </div>
-          <div class='col-md-2'>
-            <button class="btn btn-success btn-block" type="button" ng-click = "search()">Search</button>
-          </div>
+          <!-- provider ad listing:  -->
+          <div class="row list" ng-init="getAds()">
+          <provider-ads class="col-xs-6 col-md-4" ng-repeat="post in filteredSearch | startFrom: (currentPage - 1) * pageSize | limitTo: pageSize" item = "post" ></provider-ads>
         </div>
-      </div>
-    </div>
-  </div>
-  <!-- provider ad listing:  -->
-    <div class="row list" ng-init="getAds()">
-      <provider-ads class="col-xs-6 col-md-4" ng-repeat="post in filteredSearch | startFrom: (currentPage - 1) * pageSize | limitTo: pageSize" item = "post" ></provider-ads>
-    </div>
 
-    <div id="pagination">
-      <ul uib-pagination total-items="filteredSearch.length" ng-model="currentPage" item-per-page="pageSize" ></ul>
-    </div>
-  </body>
+        <div id="pagination">
+        <ul uib-pagination total-items="filteredSearch.length" ng-model="currentPage" item-per-page="pageSize" ></ul>
+      </div>
+    </body>
+    <footer>
+    </footer>

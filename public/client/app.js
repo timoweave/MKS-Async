@@ -1,11 +1,28 @@
-angular.module('async', ['async.mainController', 'async.formController', 'async.loginController', 'async.providerController', 'ngRoute', 'ui.bootstrap','uiGmapgoogle-maps', 'google.places', 'firebase'])
+angular.module('async', ['async.mainController', 'async.formController', 'async.loginController',
+  'async.providerController', 'ngRoute', 'ui.bootstrap','uiGmapgoogle-maps', 'google.places', 'firebase'])
 
-.config(['$routeProvider','uiGmapGoogleMapApiProvider','flowFactoryProvider', function($routeProvider, uiGmapGoogleMapApiProvider,flowFactoryProvider) {
+.config(['uiGmapGoogleMapApiProvider', '$routeProvider', function(uiGmapGoogleMapApiProvider,
+  $routeProvider) {
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyAce5w_fapMtVvsiBl-uxQRNZ6bpVXOD1c',
     v: '3.17',
     libraries: 'weather,geometry,visualization'
    });
+
+  $routeProvider
+  .when('/providerDash', {
+      templateUrl: 'client/providerDash/providerDash.html',
+      // 'client/providerDash/providerDash.html',
+      controller: 'ProviderController'
+    })
+    .when('/', {
+      templateUrl: 'home.html',
+      controller: 'ProviderController'
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+
 }])
 
 .factory('Modal', ['$http', 'Upload', function($http, Upload){
