@@ -55,8 +55,7 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
 
 .factory("Auth", ["$firebaseAuth",
   function($firebaseAuth) {
-    var auth = firebase.auth();
-    return $firebaseAuth(auth);
+    return $firebaseAuth();
   }
 ])
 

@@ -7,10 +7,9 @@ angular.module('async.loginController', ['firebase'])
       $scope.message = null;
       $scope.error = null;
 
-      Auth.$createUser({
-        email: $scope.email,
-        password: $scope.password
-      }).then(function(userData) {
+
+      Auth.$createUserWithEmailAndPassword($scope.email, $scope.password)
+        .then(function(userData) {
         $scope.message = "User created with uid: " + userData.uid;
       }).catch(function(error) {
         $scope.error = error;
@@ -21,22 +20,22 @@ angular.module('async.loginController', ['firebase'])
       $scope.message = null;
       $scope.error = null;
 
-      Auth.$authWithPassword({
-        email: $scope.email,
-        password: $scope.password
-      }).then(function(authData) {
+      Auth.$signInWithEmailAndPassword($scope.email, $scope.password)
+        .then(function(authData) {
         $scope.authData = authData;
         $scope.message = "User logged in with uid: " + authData.uid;
       }).catch(function(error) {
         $scope.error = error;
       });
+
+      console.log($scope.email);
     };
 
-    Auth.$onAuth(function(authData){
-      SignInState.authData = authData;
-      console.log("authData: ", authData);
-      console.log("SignInState.authData: ", SignInState.authData);
-    });
+    // Auth.onAuth(function(authData){
+    //   SignInState.authData = authData;
+    //   console.log("authData: ", authData);
+    //   console.log("SignInState.authData: ", SignInState.authData);
+    // });
 
     $scope.removeUser = function() {
       $scope.message = null;
