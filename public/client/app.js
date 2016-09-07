@@ -40,7 +40,7 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
     if(url === undefined){
       return false;
     }else{
-      return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+      return(url.match(/\.(jpeg|jpg|gif|png)$/) !== null);
     }
   };
   // var uploadFile = function(data, uploadUrl){
