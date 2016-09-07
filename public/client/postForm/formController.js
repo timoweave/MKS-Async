@@ -51,7 +51,7 @@ angular.module('async.formController', [])
     $scope.submit = function() {
       if(!Modal.checkUrl(this.imgUrl)){
         this.imgUrl = "http://i.imgur.com/XehxIGv.jpg";
-      };
+      }
       $scope.input = {
         title: this.title,
         imgUrl: this.imgUrl,
@@ -90,7 +90,7 @@ angular.module('async.formController', [])
            link: function(scope, element, attrs) {
               var model = $parse(attrs.fileModel);
               var modelSetter = model.assign;
- 
+
               element.bind('change', function(){
                  scope.$apply(function(){
                     modelSetter(scope, element[0].files[0]);

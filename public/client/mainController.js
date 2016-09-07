@@ -91,17 +91,21 @@ angular.module('async.mainController', ['ui.bootstrap'])
 ])
 .filter('startFrom', function(){
   return function(data,start){
+    if (!Array.isArray(data)) {
+      return;
+    }
     var sliced = data.slice(start);
     return sliced;
   };
 })
-.directive('topCarousel', function(){
-  return{
-    controller: 'MainController',
-    restrict: 'EA',
-    templateUrl: 'client/carousel/carousel.html'
-  };
-})
+
+  .directive('topCarousel', function() {
+    return {
+      controller: 'MainController',
+      restrict: 'EA',
+      templateUrl: 'client/carousel/carousel.html'
+    };
+  })
 
 .directive('providerAds', function() {
   return {

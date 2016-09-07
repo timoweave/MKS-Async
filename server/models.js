@@ -9,8 +9,6 @@ var mongoose = require('mongoose');
 var q = require('q');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
-var multer =  require('multer');
-var uploadImage = multer({desc : "images/"}).single('image');
 
 mongoose.Promise = require('q').Promise; // mongoose.mpromise // deprecateda
 
@@ -64,7 +62,7 @@ var PostSchema = Schema({
   }
 });
 
-/* 
+/*
  * http://mongoosejs.com/docs/guide.html#methods
  */
 
@@ -79,9 +77,9 @@ PostSchema.setUser = function(username) {
                if (find_err) {
                  user = new User();// ....
                }
-               
+
                this.postedByUser = user;
-               
+
              });
 }
 */
@@ -214,13 +212,13 @@ function addRestfulApiPerCrudModel(collection, collectionIndex, model) {
   // "http://localhost:3000/posts/13434" // 404, not found
   // "http://localhost:3000/posts/abc" // 404, not found
   // request({method : GET, url : "http://localhost:3000/posts  "}, funxtion() ...)
-  // request({method : POST, url : "http://localhost:3000/posts", 
+  // request({method : POST, url : "http://localhost:3000/posts",
   //          data : JSON.stringify({username : xyz})}, funxtion() {}
 
   this
   .route(resource_all_items) // "/posts/"
   .get(get_all_items(collection, model)) // "get all items"
-  .post(uploadImage, post_new_item(collection, model)); // "add a new item"
+  .post(post_new_item(collection, model)); // "add a new item"
 
  // request({method : GET, url : "http://localhost:3000/posts/1"}, funxtion(result)  {})
  // request({method : PUT, url : "http://localhost:3000/posts/1"}, funxtion(result)  {})

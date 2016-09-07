@@ -1,40 +1,72 @@
-angular.module('async', ['async.mainController', 'async.formController', 'async.loginController', 'ngRoute', 'ui.bootstrap','uiGmapgoogle-maps', 'google.places','flow', 'ngFileUpload'])
+angular.module('async', ['async.mainController', 'async.formController', 'async.loginController',
+  'async.providerController', 'ngRoute', 'ui.bootstrap', 'uiGmapgoogle-maps', 'google.places', 'firebase'
+])
+  .run(["$rootScope", "$location",
+    function($rootScope, $location) {
+      $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
+        // We can catch the error thrown when the $requireSignIn promise is rejected
+        // and redirect the user back to the home page
+        if (error === "AUTH_REQUIRED") {
+          $location.path("/");
+        }
+      });
+    }
+  ])
+  .config(['uiGmapGoogleMapApiProvider', '$routeProvider',
+    function(uiGmapGoogleMapApiProvider,
+      $routeProvider) {
+      uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyAce5w_fapMtVvsiBl-uxQRNZ6bpVXOD1c',
+        v: '3.17',
+        libraries: 'weather,geometry,visualization'
+      });
 
-.config(['$routeProvider','uiGmapGoogleMapApiProvider','flowFactoryProvider', function($routeProvider, uiGmapGoogleMapApiProvider,flowFactoryProvider) {
-  uiGmapGoogleMapApiProvider.configure({
-    key: 'AIzaSyAce5w_fapMtVvsiBl-uxQRNZ6bpVXOD1c',
-    v: '3.17',
-    libraries: 'weather,geometry,visualization'
-   });
+      $routeProvider
+        .when('/providerDash', {
+          templateUrl: 'client/providerDash/providerDash.html',
+          controller: 'ProviderController',
+          resolve: {
+            // controller will not be loaded until $requireSignIn resolves
+            // Auth refers to our $firebaseAuth wrapper in the factory below
+            "currentAuth": ["Auth",
+              function(Auth) {
+                // $requireSignIn returns a promise so the resolve waits for it to complete
+                // If the promise is rejected, it will throw a $stateChangeError (see above)
+                return Auth.$requireSignIn();
+              }
+            ]
+          }
+        })
+        .when('/', {
+          templateUrl: 'home.html',
+          controller: 'MainController',
+          resolve: {
+            // controller will not be loaded until $waitForSignIn resolves
+            // Auth refers to our $firebaseAuth wrapper in the factory below
+            "currentAuth": ["Auth",
+              function(Auth) {
+                // $waitForSignIn returns a promise so the resolve waits for it to complete
+                return Auth.$waitForSignIn();
+              }
+            ]
+          }
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
 
-  flowFactoryProvider.defaults = {
-    target: 'api/posts',
-    permanentErrors: [404, 500, 501],
-    maxChunkRetries: 1,
-    chunkRetryInterval: 5000,
-    simultaneousUploads: 4,
-    singleFile: true
-  };
-}])
+    }
+  ])
 
-.factory('Modal', ['$http', 'Upload', function($http, Upload){
-
-  var createAd = function(input){
-    // return Upload.upload({
-    //   url: 'upload',
-    //   data: input
-    // }).then(function(resp) {
-    //   console.log('i think we did some shit lol', resp);
-    //   return resp;
-    // }, function(err) {
-    //     console.log('error lol', err);
-    // });
-    return $http({
-      method: 'POST',
-      url: '/api/posts',
-      data: input
-    });
-  };
+.factory('Modal', ['$http',
+  function($http) {
+    var createAd = function(input) {
+      return $http({
+        method: 'POST',
+        url: '/api/posts',
+        data: input
+      });
+    };
 
   var checkUrl = function(url){
     if(url === undefined){
@@ -43,45 +75,48 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
       return(url.match(/\.(jpeg|jpg|gif|png)$/) !== null);
     }
   };
-  // var uploadFile = function(data, uploadUrl){
-  //   var fd = new FormData();
-  //   fd.append('file', data);
-  //   $http.post(uploadUrl, fd, {
-  //     transformRequest: angular.identity,
-  //     headers: {'Content-Type': undefined}
-  //   });
-  // };
 
   return{
     createAd: createAd,
     checkUrl: checkUrl
   };
-
 }])
 
-.factory('Ads', ['$http', function($http) {
 
-  var getAds = function() {
-    return $http({
-        method: 'GET',
-        url: 'api/posts',
-      })
-      .then(function(resp) {
-        return resp.data;
-      });
-  };
+.factory('Ads', ['$http',
+  function($http) {
 
-  var adModalData = null;
+    var getAds = function() {
+      return $http({
+          method: 'GET',
+          url: 'api/posts',
+        })
+        .then(function(resp) {
+          return resp.data;
+        });
+    };
 
-  return {
-    getAds: getAds,
-    adModalData: adModalData
-  };
-}])
+    var adModalData = null;
+
+    return {
+      getAds: getAds,
+      adModalData: adModalData
+    };
+  }
+])
 
 .factory("Auth", ["$firebaseAuth",
   function($firebaseAuth) {
-    var ref = new Firebase("https://docs-sandbox.firebaseio.com");
-    return $firebaseAuth(ref);
+    return $firebaseAuth();
   }
-]);
+])
+
+.factory("SignInState", function() {
+  var status = {
+    authData: null
+  };
+
+  return {
+    status: status
+  };
+});
