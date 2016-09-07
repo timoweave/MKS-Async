@@ -13,6 +13,7 @@ angular.module('async.providerController', ['ui.bootstrap'])
     $scope.getAds = function(){
       Ads.getAds()
         .then(function(data) {
+          console.log(JSON.stringify(data));
           $scope.ads = data;
         })
         .catch(function(err) {

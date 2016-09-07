@@ -30,7 +30,7 @@ angular.module('async.loginController', ["firebase"])
       }).catch(function(error) {
         $scope.error = error;
       });
-    }
+    };
 
     $scope.removeUser = function() {
       $scope.message = null;

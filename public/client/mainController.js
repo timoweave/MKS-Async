@@ -27,7 +27,9 @@ angular.module('async.mainController', ['ui.bootstrap'])
     };
 
     $scope.$watch('adModalData.latitude', function() {
+      if (($scope.adModalData) && ($scope.adModalData.latitude) && ($scope.adModalData.longitude)) {
         $scope.getMap($scope.adModalData.latitude, $scope.adModalData.longitude);
+      }
     });
     $scope.openForm = function() {
       $uibModal.open({
@@ -56,7 +58,7 @@ angular.module('async.mainController', ['ui.bootstrap'])
     };
 
     $scope.cancel = function() {
-      console.log($scope.$parent);
+      console.log(JSON.stringify($scope.$parent));
       $scope.$dismiss();
     };
 
@@ -85,10 +87,13 @@ angular.module('async.mainController', ['ui.bootstrap'])
 ])
 .filter('startFrom', function(){
   return function(data,start){
-    var sliced = data.slice(start);
-    console.log("*******",sliced);
+    var sliced;
+    if (data && Array.isArray(data)) {
+      sliced = data.slice(start);
+    }
+    console.log("startFrom", "*******",JSON.stringify(sliced), JSON.stringify(data));
     return sliced;
-  }
+  };
 })
 .directive('topCarousel', function(){
   return{
