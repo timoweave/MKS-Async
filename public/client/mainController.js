@@ -49,6 +49,10 @@ angular.module('async.mainController', ['ui.bootstrap'])
     $scope.pageSize = 12;
     $scope.currentPage = 1;
 
+    $scope.$watch('Ads.adModalData', function(){
+      $scope.adModalData = Ads.adModalData;
+    });
+
     $scope.getInfo = function(item) {
       Ads.adModalData = item;
       $uibModal.open({
@@ -87,11 +91,7 @@ angular.module('async.mainController', ['ui.bootstrap'])
 ])
 .filter('startFrom', function(){
   return function(data,start){
-    var sliced;
-    if (data && Array.isArray(data)) {
-      sliced = data.slice(start);
-    }
-    console.log("startFrom", "*******",JSON.stringify(sliced), JSON.stringify(data));
+    var sliced = data.slice(start);
     return sliced;
   };
 })

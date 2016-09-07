@@ -35,6 +35,14 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
       data: input
     });
   };
+
+  var checkUrl = function(url){
+    if(url === undefined){
+      return false;
+    }else{
+      return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    }
+  };
   // var uploadFile = function(data, uploadUrl){
   //   var fd = new FormData();
   //   fd.append('file', data);
@@ -45,7 +53,8 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
   // };
 
   return{
-    createAd: createAd
+    createAd: createAd,
+    checkUrl: checkUrl
   };
 
 }])

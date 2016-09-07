@@ -1,9 +1,10 @@
 <div ng-init = "getMap(37.7749, -122.4194)">
     <div class='modal-header'>
         <h2 class="title">{{adModalData.title}}</h2>
-        <img ng-src="{{ adModalData.imgUrl}}" width="100px" height="100px" />
     </div>
     <div class='modal-body'>
+        <img id="adProfileIcon" ng-if="adModalData.imgUrl" ng-src="{{ adModalData.imgUrl }}" width="100px" height="100px" />
+
         <h4>Your name:</h4>
         <p>{{adModalData.name}}</p>
         <h4>School or University:</h4>

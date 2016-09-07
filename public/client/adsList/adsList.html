@@ -1,7 +1,10 @@
 <div ng-click="getInfo(item)" class="borderonad">
-<b>{{item.title}}</b><br/>
-<b>Name:</b> {{item.name}}<br/>
-<b>School:</b> {{item.school}}<br/>
-<b>Major:</b> {{item.major}}<br/>
-<b>Price:</b> {{item.price}}<br/>
+<div>
+  <img id="adListIcon" ng-if="item.imgUrl" ng-src="{{ item.imgUrl}}"/>
+  <b>{{item.title}}</b><br/>
+  <b>Name:</b> {{item.name}}<br/>
+  <b>Major:</b> {{item.major}}<br/>
+  <b>School:</b> {{item.school}}<br/>
+  <b>Price:</b> ${{item.price}} / hour <br/>
+</div>
 </div>
