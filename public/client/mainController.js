@@ -100,18 +100,37 @@ angular.module('async.mainController', ['ui.bootstrap'])
       };
 
       Auth.$onAuthStateChanged(function(authData) {
-      SignInState.authData = authData;
-      console.log("authData: ", authData);
-      console.log("SignInState.authData: ", SignInState.authData);
-    });
+        SignInState.authData = authData;
+        console.log("authData: ", authData);
+        console.log("SignInState.authData: ", SignInState.authData);
+      });
     }
   ])
 
-// For Pagination
-.filter('startFrom', function() {
-  return function(data, start) {
+.filter('filterSearchModel', function(){
+  return function(items, $scope, search) {
+    $scope.filteredSearch = items.filter(filter_search);
+    return $scope.filteredSearch;
+    
+    function filter_search(element, index, array) {
+      var searchKeys = Object.keys(search);
+      var match = searchKeys.reduce(matchKeys, true);
+      return match;
+      
+      function matchKeys(result, key, index, container) {
+        if (!result) { return false; }
+          result = element[key].toLowerCase().match(search[key].toLowerCase());
+        return result;
+      }
+    }
+  };
+})
+
+.filter('startFrom', function(){
+  return function(data,start){
+
     if (!Array.isArray(data)) {
-      return;
+      return undefined;
     }
     var sliced = data.slice(start);
     return sliced;
