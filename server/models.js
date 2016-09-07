@@ -1,6 +1,7 @@
 
 ////////////////////////////////////////////////////////////////
 /// models, schema
+var firebase = require('firebase');
 var fs = require('fs');
 var config = require('./config');
 var chalk = require('chalk');
@@ -17,7 +18,7 @@ var ImageSchema = Schema({
   originalName: { type: String, required: false }, // client-original-name
   saveName: { type: String, required: false }, // server-saved-name
   firebaseName: { type: String, required : false }, //
-  uploadImage: { type: String, required: false }, // file content
+  uploadImage: { type: String, required: false } // file content
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -349,6 +350,17 @@ function delete_one_item(resource_one_item, collectionIndex, model) {
     });
   }
 }
+
+////////////////////////////////////////////////////////////////
+/// firebase
+
+var firebaseConfig = {
+  apiKey: "AIzaSyBf5hgcfKqgRMvx4DvFtSq78S73Uv0kZic",
+  authDomain: "future-insight.firebaseapp.com",
+  databaseURL: "https://future-insight.firebaseio.com",
+  storageBucket: "future-insight.appspot.com"
+};
+firebase.initializeApp(firebaseConfig);
 
 ////////////////////////////////////////////////////////////////
 /// exports
