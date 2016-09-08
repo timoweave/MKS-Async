@@ -17,5 +17,13 @@
         </div>
       </nav>
     <hr>
-    <div> <code>{{ email }}</code> <br/></div>
+    <!-- provider ad listing:  -->
+    <div class="row list" ng-init="getAds()">
+    <!-- filterSearchModel:id -->
+      <provider-ads class="col-xs-6 col-md-4" ng-repeat="post in ads | filter: myFilter | startFrom: (currentPage - 1) * pageSize | limitTo: pageSize" item = "post" ></provider-ads>
+    </div>
+
+    <div id="pagination">
+      <ul uib-pagination total-items="filteredSearch.length" ng-model="currentPage" item-per-page="pageSize" ></ul>
+    </div>
   </div>
