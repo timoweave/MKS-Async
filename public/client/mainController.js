@@ -1,4 +1,5 @@
 angular.module('async.mainController', ['ui.bootstrap'])
+
   .controller('MainController', ['$scope', '$uibModal', '$filter', 'Ads', 'uiGmapGoogleMapApi', 'SignInState', 'Auth',
     function($scope, $uibModal, $filter, Ads, uiGmapGoogleMapApi, SignInState, Auth) {
       // Google Map Implementation
@@ -118,8 +119,9 @@ angular.module('async.mainController', ['ui.bootstrap'])
       return match;
       
       function matchKeys(result, key, index, container) {
-        if (!result) { return false; }
-          result = element[key].toLowerCase().match(search[key].toLowerCase());
+        if (!result) { return result; }
+        if (search[key].length === 0) { return result; }
+        result = element[key].toLowerCase().match(search[key].toLowerCase());
         return result;
       }
     }
