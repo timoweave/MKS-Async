@@ -1,6 +1,8 @@
 angular.module('async.providerController', ['ui.bootstrap'])
 
-.controller('ProviderController', ['$scope', '$uibModal', 'Ads', 'SignInState', 'Auth', '$location', function($scope, $uibModal, Ads, SignInState, Auth, $location){
+.controller('ProviderController', ['$scope', '$uibModal', 'Ads', 'SignInState', 'Auth', '$location', function($scope,
+  $uibModal, Ads, SignInState, Auth, $location){
+
    $scope.openForm = function() {
       $uibModal.open({
         templateUrl: 'client/postForm/postForm.html',
@@ -15,9 +17,13 @@ angular.module('async.providerController', ['ui.bootstrap'])
     };
 
     $scope.saveAuthStatus = function(){
-      $scope.status.authData = SignInState.authData;
+      $scope.authData = SignInState.authData;
+      $scope.id = $scope.authData.uid;
+      $scope.email = $scope.authData.email;
       console.log('SignInState.authData: ', SignInState.authData);
-      console.log('$scope.status.authData: ', $scope.status.authData);
+      console.log('$scope.authData: ', $scope.authData);
+      console.log('$scope.id: ', $scope.id);
+      console.log('$scope.email :', $scope.email);
     };
 
     $scope.logout = function() {
