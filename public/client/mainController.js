@@ -1,6 +1,6 @@
 angular.module('async.mainController', ['ui.bootstrap'])
-.controller('MainController', ['$scope', '$uibModal', '$filter', 'Ads', 'uiGmapGoogleMapApi', 'SignInState', 'Auth', 'Modal',
-    function($scope, $uibModal, $filter, Ads, uiGmapGoogleMapApi, SignInState, Auth, Modal) {
+.controller('MainController', ['$scope', '$uibModal', '$filter', 'Ads', 'uiGmapGoogleMapApi', 'SignInState', 'Auth', 'Modal', '$location',
+    function($scope, $uibModal, $filter, Ads, uiGmapGoogleMapApi, SignInState, Auth, Modal, $location) {
       // Google Map Implementation
       $scope.render = true;
       $scope.getMap = function(lat, lng) {
@@ -118,6 +118,7 @@ angular.module('async.mainController', ['ui.bootstrap'])
         $scope.auth = Auth;
 
         $scope.auth.$signOut();
+        $location.path('/');
       };
 
       Auth.$onAuthStateChanged(function(authData) {

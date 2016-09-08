@@ -1,5 +1,5 @@
 angular.module('async.formController', [])
-.controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi', 'SignInState', 'Auth'
+.controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi', 'SignInState', 'Auth',
   function($scope, $http, Modal, $window, uiGmapGoogleMapApi, SignInState, Auth) {
     $scope.getMap = function(lat, lng) {
       uiGmapGoogleMapApi.then(function(maps) {
