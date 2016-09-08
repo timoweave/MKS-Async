@@ -30,18 +30,25 @@
     <div class='modal-body'>
         <form>
             <label>Your Name:</label>
-            <input class='form-control' ng-model='username' type='text'></input>
+            <input class='form-control' ng-model='username' name='username' type='text' required></input>
             <label>Your Email:</label>
-            <input class='form-control' ng-model='useremail' type='text'></input>
+            <input class='form-control' ng-model='useremail' name='email' type='email' required></input>
             <label>Your Phone Number:</label>
-            <input class='form-control' ng-model='userphone' type='text'></input>
+            <input class='form-control' ng-model='userphone' name='phoneNum' type='text'></input>
             <label>Your Message</label>
-            <textarea class='form-control' ng-model='usermessage'></textarea>
+            <textarea class='form-control' ng-model='usermessage' name='message' required></textarea>
+        <div id="bookButtons">
+            <button type='submit' class="btn btn-success" formtarget="_blank" ng-click='submitData(); showbooking=false'>Confirm</button>
+            <button class="btn btn-outline-default" ng-click='cancel()'>Cancel</button>
+        </div>
         </form>
     </div>
-    <div class='modal-footer'>
-        <button type='submit' class="btn btn-success">Send Message</button>
-        <button class="btn btn-outline-default" ng-click='cancel()'>Cancel</button>
-    </div>
 </div>
+
+    <div class='modal-body' ng-if='adModalData.userDataSubmitted'>
+        <h3>Your information has been submitted.</h3>
+        <h4>Email your personal insighter Now!</h4>
+        <p>EMAIL: {{ adModalData.email }}</p>
+    </div>
+
 </div>

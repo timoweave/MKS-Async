@@ -23,7 +23,6 @@ angular.module('async.loginController', ['firebase'])
     $scope.loginUser = function() {
       $scope.message = null;
       $scope.error = null;
-
       $scope.auth = Auth;
 
       $scope.auth.$signInWithEmailAndPassword($scope.email, $scope.password)
@@ -37,8 +36,6 @@ angular.module('async.loginController', ['firebase'])
     };
 
     $scope.signInWith = function(provider) {
-      $scope.auth = Auth;
-
       $scope.message = null;
       $scope.error = null;
 

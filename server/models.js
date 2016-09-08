@@ -27,9 +27,11 @@ var ImageSchema = Schema({
 var UserSchema = Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
-  password: { type: String, required: true },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
+  phoneNumber: { type: Number, required: false},
+  message: {type: String, required: false},
+  password: { type: String, required: false },
+  firstName: { type: String, required: false },
+  lastName: { type: String, required: false },
   schools: [ { ref: 'School', type : ObjectId, required : false } ],
   comments: [ { ref: 'Comment', type: ObjectId, required : false } ]
 }, {

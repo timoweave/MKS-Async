@@ -1,7 +1,6 @@
 angular.module('async.mainController', ['ui.bootstrap'])
-
-  .controller('MainController', ['$scope', '$uibModal', '$filter', 'Ads', 'uiGmapGoogleMapApi', 'SignInState', 'Auth',
-    function($scope, $uibModal, $filter, Ads, uiGmapGoogleMapApi, SignInState, Auth) {
+.controller('MainController', ['$scope', '$uibModal', '$filter', 'Ads', 'uiGmapGoogleMapApi', 'SignInState', 'Auth', 'Modal',
+    function($scope, $uibModal, $filter, Ads, uiGmapGoogleMapApi, SignInState, Auth, Modal) {
       // Google Map Implementation
       $scope.render = true;
       $scope.getMap = function(lat, lng) {
@@ -70,6 +69,7 @@ angular.module('async.mainController', ['ui.bootstrap'])
       $scope.$watch('ads', function() {
         $scope.filteredSearch = $scope.ads;
       });
+
       // Dismiss modal by pressing Cancel
       $scope.cancel = function() {
         $scope.$dismiss();
@@ -85,6 +85,26 @@ angular.module('async.mainController', ['ui.bootstrap'])
           'major': $scope.searchModel.major
         });
       };
+
+      //submit user data on "BOOK" button
+    $scope.submitData = function(input){
+      $scope.userData = {
+        username: this.username,
+        email: this.useremail,
+        phoneNumber: this.userphone,
+        message: this.usermessage
+      };
+      Modal.userData($scope.userData)
+      .success(function(){
+        console.log('POST request user data:', $scope.userData);
+        $scope.adModalData.userDataSubmitted = true;
+      })
+      .error(function(err){
+        console.log('Error: ', error);
+      });
+
+    };
+
       // Check if user is logged in
       $scope.isUserLoggedIn = function() {
         if (SignInState.authData) {
