@@ -116,7 +116,9 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
     authData: null
   };
 
-  return {
-    status: status
-  };
+  return status;
+
+  // {
+  //   status: status
+  // };
 });

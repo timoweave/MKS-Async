@@ -52,9 +52,10 @@ angular.module('async.loginController', ['firebase'])
     };
 
     Auth.$onAuthStateChanged(function(authData) {
+      console.log("authdata BEFORE saving:", SignInState.authData);
       SignInState.authData = authData;
-      console.log("authData: ", authData);
-      console.log("SignInState.authData: ", SignInState.authData);
+      console.log("authData AFTER saving: ", authData);
+      console.log("SignInState.authData SAVED DATA: ", SignInState.authData);
     });
   }
 ]);

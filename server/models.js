@@ -45,6 +45,8 @@ var PostSchema = Schema({
   major: { type: String , required: true },
   description: { type: String, required: true },
   price: Number,
+  UID: {type: String, required: true },
+  email: {type: String, required: true},
   name : { type: String, required: true },
   school : { type: String, required : false },
   // school: { ref: 'School', type: ObjectId, required : false },

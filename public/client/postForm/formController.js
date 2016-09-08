@@ -1,7 +1,7 @@
 angular.module('async.formController', [])
 
-.controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi',
-  function($scope, $http, Modal, $window, uiGmapGoogleMapApi) {
+.controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi', 'SignInState',
+  function($scope, $http, Modal, $window, uiGmapGoogleMapApi, SignInState) {
 
     // $scope.obj = {};
 
@@ -49,6 +49,8 @@ angular.module('async.formController', [])
     $scope.place = null;
 
     $scope.submit = function() {
+      console.log('STATEOFSIGNIN : ', SignInState.authData.uid);
+      console.log('EMAILforPOSTrequest :', SignInState.authData.email);
       if(!Modal.checkUrl(this.imgUrl)){
         this.imgUrl = "http://i.imgur.com/XehxIGv.jpg";
       }
@@ -58,6 +60,8 @@ angular.module('async.formController', [])
         image : this.image,
         name: this.name,
         school: this.school,
+        UID: SignInState.authData.uid,
+        email: SignInState.authData.email,
         major: this.major,
         price: this.price,
         latitude: $scope.map.center.latitude,
