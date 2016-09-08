@@ -37,6 +37,11 @@ module.exports = function(grunt) {
 //           MINIFY THE ALREADY CONCATENATED VERSION OF THE FILES
     uglify: {
       build: {
+        options: {
+          beautify: true,
+          sourceMap: true,
+          sourceMapIncludeSources: true
+        },
         src: 'public/dist/production.js',
         dest: 'public/dist/production.min.js'
       }
