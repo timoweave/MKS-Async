@@ -18,7 +18,7 @@ angular.module('async.providerController', ['ui.bootstrap'])
 
     $scope.myFilter = function(post){
       console.log('FINDME', $scope.id);
-      return post.UID === $scope.id;
+      return post.UID === Auth.$getAuth().uid;
     }
 
     $scope.saveAuthStatus = function(){
