@@ -68,18 +68,27 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
       });
     };
 
-  var checkUrl = function(url){
-    if(url === undefined){
-      return false;
-    }else{
-      return(url.match(/\.(jpeg|jpg|gif|png)$/) !== null);
-    }
-  };
+    var userData = function(input){
+      return $http({
+        method: 'POST',
+        url:'/api/users',
+        data: input
+      });
+    };
 
-  return{
-    createAd: createAd,
-    checkUrl: checkUrl
-  };
+    var checkUrl = function(url){
+      if(url === undefined){
+        return false;
+      }else{
+        return(url.match(/\.(jpeg|jpg|gif|png)$/) !== null);
+      }
+    };
+
+    return{
+      createAd: createAd,
+      checkUrl: checkUrl,
+      userData: userData
+    };
 }])
 
 

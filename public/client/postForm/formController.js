@@ -1,21 +1,6 @@
 angular.module('async.formController', [])
-
 .controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi', 'SignInState',
   function($scope, $http, Modal, $window, uiGmapGoogleMapApi, SignInState) {
-
-    // $scope.obj = {};
-
-    // $scope.print=function(){
-    //   console.log('testing:', JSON.stringify($scope.obj.flow));
-    // }
-
-
-    // $scope.uploadFile = function(){
-    //   var file = $scope.myFile;
-    //   var uploadUrl = '/upload';
-    //   Modal.uploadFile(file, uploadUrl);
-    // }
-
     $scope.getMap = function(lat, lng) {
       uiGmapGoogleMapApi.then(function(maps) {
         $scope.map = {

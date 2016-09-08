@@ -145,3 +145,7 @@ input {
   height: 80px;
   width: 80px;
 }
+
+#bookButtons{
+  margin-top: 10px;
+}
