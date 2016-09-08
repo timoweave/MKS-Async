@@ -120,12 +120,13 @@ angular.module('async', ['async.mainController', 'async.formController', 'async.
   }
 ])
 
-.factory("SignInState", function() {
-  var status = {
-    authData: null
-  };
+.service("SignInState", function() {
+  this.authData = null;
+  // var status = {
+  //   authData: null
+  // };
 
-  return status;
+  // return status;
 
   // {
   //   status: status

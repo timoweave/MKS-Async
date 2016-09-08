@@ -132,12 +132,12 @@ angular.module('async.mainController', ['ui.bootstrap'])
   return function(items, $scope, search) {
     $scope.filteredSearch = items.filter(filter_search);
     return $scope.filteredSearch;
-    
+
     function filter_search(element, index, array) {
       var searchKeys = Object.keys(search);
       var match = searchKeys.reduce(matchKeys, true);
       return match;
-      
+
       function matchKeys(result, key, index, container) {
         if (!result) { return result; }
         if (search[key].length === 0) { return result; }

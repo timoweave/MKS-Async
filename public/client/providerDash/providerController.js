@@ -16,6 +16,11 @@ angular.module('async.providerController', ['ui.bootstrap'])
       authData: null
     };
 
+    $scope.myFilter = function(post){
+      console.log('FINDME', $scope.id);
+      return post.UID === $scope.id;
+    }
+
     $scope.saveAuthStatus = function(){
       $scope.authData = SignInState.authData;
       $scope.id = $scope.authData.uid;
@@ -26,22 +31,34 @@ angular.module('async.providerController', ['ui.bootstrap'])
       console.log('$scope.email :', $scope.email);
     };
 
+
+
     $scope.logout = function() {
       $scope.auth = Auth;
-
       $scope.auth.$signOut();
       $location.path('/');
 
     };
 
     $scope.getAds = function(){
-      Ads.getAds()
-        .then(function(data) {
-          console.log(JSON.stringify(data));
-          $scope.ads = data;
-        })
-        .catch(function(err) {
-          console.error(err);
-        });
+
+        Ads.getAds()
+          .then(function(data) {
+            console.log(JSON.stringify(data));
+            $scope.ads = data;
+          })
+          .catch(function(err) {
+            console.error(err);
+          });
+
     };
+
+    Auth.$onAuthStateChanged(function(authData) {
+      // console.log("authData1: ", authData);
+      // console.log("SignInState.authData1: ", SignInState.authData);
+      SignInState.authData = authData;
+      // console.log("authData2: ", authData);
+      // console.log("SignInState.authData2: ", SignInState.authData);
+    });
+
 }]);
