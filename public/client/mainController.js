@@ -44,7 +44,7 @@ angular.module('async.mainController', ['ui.bootstrap'])
         });
       };
       // Data storage
-      $scope.ads = {};
+      $scope.ads = []; // array of posts ads
       // Load single ad's information into modal
       $scope.getInfo = function(item) {
         Ads.adModalData = item;
