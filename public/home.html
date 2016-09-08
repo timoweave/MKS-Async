@@ -43,14 +43,11 @@
     <div class='container-fluid'>
       <div class='control-group controls searchBar'>
         <div class='row'>
-          <div class='col-md-5 colFive'>
+          <div class='col-md-offset-1 col-md-5 colFive'>
             <input class="form-control" type='text' name='school' placeholder='Enter School Name Here' ng-model='searchModel.school'>
           </div>
           <div class='col-md-5 colFive'>
             <input class="form-control" type='text' name='major' placeholder='Enter Major Here' ng-model='searchModel.major'>
-          </div>
-          <div class='col-md-2 colTwo'>
-            <button class="btn btn-success btn-block" type="button" ng-click = "search()">Search</button>
           </div>
         </div>
       </div>
@@ -58,7 +55,7 @@
   </div>
   <!-- provider ad listing:  -->
     <div class="row list" ng-init="getAds()">
-      <provider-ads class="col-xs-6 col-md-4" ng-repeat="post in filteredSearch | startFrom: (currentPage - 1) * pageSize | limitTo: pageSize" item = "post" ></provider-ads>
+      <provider-ads class="col-xs-6 col-md-4" ng-repeat="post in ads | filterSearchModel:this:searchModel | startFrom: (currentPage - 1) * pageSize | limitTo: pageSize" item = "post" ></provider-ads>
     </div>
 
     <div id="pagination">
