@@ -1,8 +1,8 @@
 <div class = 'modal-header title'>
-  Sign Up/In
+  <h4 class = "title">Sign Up or Log In</h4>
 </div>
 <div class='modal-body form-group'>
-  <p>Enter an email and password below and either sign in to an existing account or sign up.</p><br/>
+  <p>You must log in or sign up in order to add a listing. Please enter your email and password below to proceed.</p><br/>
   <form>
     <div class ='col-md-12'>
       <input class="form-control" type="text" id="email" name="email" placeholder="Email" ng-model="email"/>
@@ -18,13 +18,16 @@
       <div class='col-md-6'>
       <button class="btn btn-outline-default btn-block" name="signup" ng-click="createUser();">Sign Up</button>
       </div>
+      <br/><br/>
       <div class='col-md-6'>
         <button class="btn btn-success btn-block" name="facebook" ng-click="signInWith('google');">Login with Google</button>
       </div>
     </form>
+    <br/><br/>
     <!-- Container where we'll display the user details -->
-    <br/><br/><br/>
+    <!-- <br/><br/><br/>
     <div class="quickstart-user-details-container">
       Firebase sign-in status: <span id="quickstart-sign-in-status">{{ message }}</span>
     </div>
-  </div>
+ -->
+ </div>
