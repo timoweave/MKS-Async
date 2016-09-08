@@ -13,6 +13,7 @@ angular.module('async.loginController', ['firebase'])
       $scope.auth.$createUserWithEmailAndPassword($scope.email, $scope.password)
         .then(function(userData) {
           $scope.auth.$signInWithEmailAndPassword($scope.email, $scope.password);
+          $location.path('/providerDash');
           $scope.message = "User created with uid and logged in: " + userData.uid;
         }).catch(function(error) {
           $scope.error = error;

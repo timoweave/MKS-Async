@@ -1,6 +1,6 @@
 angular.module('async.mainController', ['ui.bootstrap'])
-  .controller('MainController', ['$scope', '$uibModal', '$filter', 'Ads', 'uiGmapGoogleMapApi', 'SignInState',
-    function($scope, $uibModal, $filter, Ads, uiGmapGoogleMapApi, SignInState) {
+  .controller('MainController', ['$scope', '$uibModal', '$filter', 'Ads', 'uiGmapGoogleMapApi', 'SignInState', 'Auth',
+    function($scope, $uibModal, $filter, Ads, uiGmapGoogleMapApi, SignInState, Auth) {
       // Google Map Implementation
       $scope.render = true;
       $scope.getMap = function(lat, lng) {
@@ -92,6 +92,18 @@ angular.module('async.mainController', ['ui.bootstrap'])
           return false;
         }
       };
+      // Logout
+      $scope.logout = function() {
+        $scope.auth = Auth;
+
+        $scope.auth.$signOut();
+      };
+
+      Auth.$onAuthStateChanged(function(authData) {
+      SignInState.authData = authData;
+      console.log("authData: ", authData);
+      console.log("SignInState.authData: ", SignInState.authData);
+    });
     }
   ])
 
