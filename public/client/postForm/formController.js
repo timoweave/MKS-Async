@@ -1,6 +1,6 @@
 angular.module('async.formController', [])
-.controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi', 'SignInState',
-  function($scope, $http, Modal, $window, uiGmapGoogleMapApi, SignInState) {
+.controller('FormController', ['$scope', '$http', 'Modal', '$window', 'uiGmapGoogleMapApi', 'SignInState', 'Auth'
+  function($scope, $http, Modal, $window, uiGmapGoogleMapApi, SignInState, Auth) {
     $scope.getMap = function(lat, lng) {
       uiGmapGoogleMapApi.then(function(maps) {
         $scope.map = {
@@ -39,15 +39,15 @@ angular.module('async.formController', [])
       if(!Modal.checkUrl(this.imgUrl)){
         this.imgUrl = "http://i.imgur.com/XehxIGv.jpg";
       }
-      
+
       $scope.input = {
         title: this.title,
         imgUrl: this.imgUrl,
         image : this.image,
         name: this.name,
         school: this.school,
-        UID: SignInState.authData.uid,
-        email: SignInState.authData.email,
+        UID: Auth.$getAuth().uid,
+        email: Auth.$getAuth().email,
         major: this.major,
         price: this.price,
         latitude: $scope.map.center.latitude,
